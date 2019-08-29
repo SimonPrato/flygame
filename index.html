@@ -158,6 +158,8 @@
          	var shooting = false;
          	var newEnemies=0;
          	var heightShotgun;
+			var deathScreenRectX=window.innerWidth;
+			var deathScreenRectY=0;
 			var startScreenOn=true;
 			var grenadeNumber=0;
 			var deathAnimation=[0,0,0,0,0,0,0,0];
@@ -171,14 +173,18 @@
          	setInterval(game,16);
 			function gameOverScreen()
 			{
+			timer++;
 			 ctx.font = "100px Arial";
          		ctx.fillStyle='#ff0000';
          		ctx.fillText("GameOver",645,460);
          		ctx.font = "25px Arial";
          		ctx.fillStyle='#fff';
          		ctx.fillText("Score: "+score,700,560);
-         		ctx.fillStyle='#fff';
-         		ctx.fillText("Highscore: 16100 (Tobias W.)",700,590);
+				
+         		ctx.fillStyle="black";
+				ctx.globalAlpha=0.5
+				ctx.fillRect(0,0,deathScreenRectX,deathScreenRectY);
+			deathScreenRectY++;
 				
 				
 		}
@@ -275,6 +281,7 @@
          }
          	}
          	else{
+			timer=0;
          		setIntervall(gameOverScreen,16);
          	}
              }
@@ -611,7 +618,7 @@
          	ctx.fillText("Score: " + score,10,20);
          	ctx.font = "25px verdana";
          	ctx.fillStyle = "#000";
-         	ctx.fillText("Highscore: 16100 (Tobias W.)",10,45);
+ 
 			ctx.fillStyle="#000";
 			ctx.fillText("Beta",10,70);
          	}
