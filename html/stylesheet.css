@@ -9,7 +9,8 @@ html, body {  background-size:cover;overflow: hidden;width:100%; height:100%; ba
 	left: 0;
 	right: 0;
 	bottom: 0;
-	width: 100%;
-	height: 100%;
+	width:window.width;
+	height:widow.height;
+
 	cursor: default;
 }

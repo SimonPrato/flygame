@@ -63,6 +63,9 @@
       <script>
          window.onload = function() {
 		 
+		 var faktorX=screen.width/1920;
+		 var faktorY=screen.height/1080;
+		 
 		 var coinPos=['x','x','x','x','x','x','x','x'];
              var c=document.getElementById("theCanvas");
              var ctx=c.getContext("2d");
@@ -140,15 +143,15 @@
 			var spawn = true;
 			var money = 0;
 			var confirm=0;
-         	var speedjumpTemp=2.3;
+         	var speedjumpTemp=2.3*faktorY;
          	var score = 0;
-         	var posY= 700;
-         	var posXop=[1731,'x','x','x','x','x','x','x'];
-         	var posYop=[720,'x','x','x','x','x','x','x'];
-         	var speedOP=[5,5,5,5,5,5,5,5];
+         	var posY= 700*faktorY;
+         	var posXop=[1731*faktorX,'x','x','x','x','x','x','x'];
+         	var posYop=[720*faktorY,'x','x','x','x','x','x','x'];
+         	var speedOP=[5*faktorX,5*faktorX,5*faktorX,5*faktorX,5*faktorX,5*faktorX,5*faktorX,5*faktorX];
          	var speedjump = speedjumpTemp;
-         	var acc = 0.3;
-         	var grav = -0.00981;
+         	var acc = 0.3*faktorX;
+         	var grav = -0.00981*faktorY;
          	var speed = 0;
          	var jumptime = 0;
          	var a;
@@ -164,7 +167,7 @@
          	var up = false;
          	var enemies = 0;
          	var ang;
-         	var speedBullet=40;
+         	var speedBullet=40*faktorX;
          	var angShot;
          	var opponentDead = [0,0,0,0,0,0,0,0];
 	var oppType=[2,2,2,2,2,2,2,2];
@@ -186,8 +189,8 @@
 			var facingLeft=false;
          	var posXshot;
          	var posYshot;
-			heightShotgun=800;
-			widthShotgun=500;
+			heightShotgun=800*faktorY;
+			widthShotgun=500*faktorX;
          	var refreshInterval=setInterval(game,16);
 			function gameOverScreen()
 			{
@@ -215,17 +218,17 @@
 		}
 			function reset()
 			{
-			posY= 700;
-			posX = 300;
+			posY= 700*faktorY;
+			posX = 300*faktorX;
 			timer=0;
 			money = 0;
 			grenadePosY=['x','x','x','x','x','x','x','x'];
 			grenadePosX=['x','x','x','x','x','x','x','x'];
 			temp=['x','x','x','x','x','x','x','x'];
 			explosionTemp=['x','x','x','x','x','x','x','x'];
-			posXop=[1731,'x','x','x','x','x','x','x'];
-			posYop=[720,'x','x','x','x','x','x','x'];
-			speedOP=[5,5,5,5,5,5,5,5];
+			posXop=[1731*faktorX,'x','x','x','x','x','x','x'];
+			posYop=[720*faktorY,'x','x','x','x','x','x','x'];
+			speedOP=[5*faktorX,5*faktorX,5*faktorX,5*faktorX,5*faktorX,5*faktorX,5*faktorX,5*faktorX];
 			score = 0;
 			posXbullet=0;
 			posYbullet=0;
@@ -277,7 +280,7 @@
 			ctx.fillText("-Soundtracks!",(screen.width/1890)*1650,screen.height/5+40);
 			ctx.fillText("-Schöneres Design",(screen.width/1890)*1650,screen.height/5+60);
 			
-		ctx.fillText("Viel Spaß",1690,600);
+		ctx.fillText("Viel Spaß",1690*faktorX,600*faktorY);
 			}
 			function handleMouseDown(e)
 			{
@@ -372,16 +375,16 @@
          			drawShotgun();
 					}
          			drawScore();
-					   ang=Math.atan((heightShotgun-(posY+85))/(widthShotgun-(posX+60)));
+					   ang=Math.atan((heightShotgun-(posY+85*faktorY))/(widthShotgun-(posX+60*faktorX)));
 			if(facingLeft)
 			{
-			ang=Math.atan((heightShotgun-(posY+115))/(widthShotgun-(posX+130)));
+			ang=Math.atan((heightShotgun-(posY+115*faktorY))/(widthShotgun-(posX+130*faktorX)));
 			}
-		 if(widthShotgun-posX<60)
+		 if(widthShotgun-posX<60*faktorX)
 		 {
 		 facingLeft=true;
 		 }
-		 else if(widthShotgun-posX > -65){
+		 else if(widthShotgun-posX > -65*faktorX){
 		 facingLeft=false;
 		 }
          			drawPortal();
@@ -406,21 +409,21 @@
          	{
          	if((timer/64)<1)
          	{
-         	 ctx.drawImage(img1links,posX,posY,200,200);
+         	 ctx.drawImage(img1links,posX,posY,200*faktorX,200*faktorY);
          	}
          	else if((timer/64)<=2)
          	{
-         	ctx.drawImage(img2links,posX,posY,200,200);
+         	ctx.drawImage(img2links,posX,posY,200*faktorX,200*faktorY);
          	}
          	} 
          	else{
          		if((timer/64)<1)
          	{
-         	 ctx.drawImage(img1,posX,posY,200,200);
+         	 ctx.drawImage(img1,posX,posY,200*faktorX,200*faktorY);
          	}
          	else if((timer/64)<=2)
          	{
-         	ctx.drawImage(img2,posX,posY,200,200);
+         	ctx.drawImage(img2,posX,posY,200*faktorX,200*faktorY);
          	}
          	}
          	
@@ -428,28 +431,28 @@
          	 else{
 			 if(facingLeft)
 			 {
-			      	 ctx.drawImage(img1links,posX,posY,200,200);
+			      	 ctx.drawImage(img1links,posX,posY,200*faktorX,200*faktorY);
 			 }
 			 else{
-         	 ctx.drawImage(img1,posX,posY,200,200);
+         	 ctx.drawImage(img1,posX,posY,200*faktorX,200*faktorY);
 			 }
          	 }
 			 }
 			 function testForShop()
 			 {
-			 if(posX<5)
+			 if(posX<5*faktorX)
 			 {
 			 clearInterval(refreshInterval);
 			 document.onmousedown=null;
 			 document.onmousedown=shopMouse;
-			 posX=100;
+			 posX=100*faktorX;
 			 refreshInterval=setInterval(shop,16);
 			 }
 			 }
 			 function shopMouse(e)
 			 {
 			 
-			 if(e.pageX>screen.width/3.43&&e.pageY>screen.height/2.1&&e.pageX<(screen.width/3.43)+100&&e.pageY<(screen.height/2.1)+30)
+			 if(e.pageX>screen.width/3.43&&e.pageY>screen.height/2.1&&e.pageX<(screen.width/3.43)+100*faktorX&&e.pageY<(screen.height/2.1)+30*faktorY)
 			 {
 			 if(gun[0+gunCounter]==1)
 			 {
@@ -496,11 +499,11 @@
 			{
 			ang=Math.atan((heightShotgun-(posY+115))/(widthShotgun-(posX+130)));
 			}
-		 if(widthShotgun-posX<60)
+		 if(widthShotgun-posX<60*faktorX)
 		 {
 		 facingLeft=true;
 		 }
-		 else if(widthShotgun-posX > -65){
+		 else if(widthShotgun-posX > -65*faktorY){
 		 facingLeft=false;
 		 }
 			 drawJumperShop();
@@ -520,7 +523,7 @@
 			 {
 			 document.body.style.backgroundImage="url('img/hintergrund3.png')";
 			 }
-			 posX=100;
+			 posX=100*faktorX;
 			 refreshInterval=setInterval(start,16);
 			 }
 			 }
@@ -564,7 +567,7 @@
 			
 			 function testGrenade()
 			 {
-			 if(posX>grenadePosX[i]-120&&posX<grenadePosX[i]+120&&posY>grenadePosY[i]-100)
+			 if(posX>grenadePosX[i]-120*faktorX&&posX<grenadePosX[i]+120*faktorX&&posY>grenadePosY[i]-100*faktorY)
 			 {
 			 lost=true;
 			 }
@@ -598,11 +601,11 @@
 			 {
 			 if(grenadePosX[i]!='x')
 			 {
-			 if(grenadePosY[i]>760)
+			 if(grenadePosY[i]>760*faktorY)
 			 {
 			 bombExplosion.play();
 			 testGrenade();
-			 ctx.drawImage(explosion,grenadePosX[i],grenadePosY[i],160,160);
+			 ctx.drawImage(explosion,grenadePosX[i],grenadePosY[i],160*faktorX,160*faktorY);
 			 
 			 if(explosionTemp[i]==timer)
 			 {
@@ -612,7 +615,7 @@
 		
 			 }
 			 else{
-			 ctx.drawImage(grenade,grenadePosX[i],grenadePosY[i],120,120);
+			 ctx.drawImage(grenade,grenadePosX[i],grenadePosY[i],120*faktorX,120*faktorY);
 			 grenadePosY[i]+=8;
 			 explosionTemp[i]=timer;
 			 if(explosionTemp[i]>=50)
@@ -632,24 +635,24 @@
          	newEnemies = 0;
          	enemies++;
 	
-         	posXop[enemies] = 1731;
-         	posYop[enemies]=720;
+         	posXop[enemies] = 1731*faktorX;
+         	posYop[enemies]=720*faktorY;
          	}
 			 }
 			 function drawMoney()
 			 {
-			 ctx.drawImage(coin1,1500,-28,150,150);
+			 ctx.drawImage(coin1,1500*faktorX,-28*faktorY,150*faktorX,150*faktorY);
 			  ctx.font = "60px Arial";
 					ctx.fillStyle='#fff';
-			 ctx.fillText("x ",1630,57);
+			 ctx.fillText("x ",1630*faktorX,57*faktorY);
 			 ctx.font = "80px Arial";
-			 ctx.fillText(money,1680,68);
+			 ctx.fillText(money,1680*faktorX,68*faktorY);
 			 ctx.font = "60px Arial";
 			 ctx.lineWidth=2;
 					ctx.strokeStyle='#000';
-			 ctx.strokeText("x ",1630,57);
+			 ctx.strokeText("x ",1630*faktorX,57*faktorY);
 			  ctx.font = "80px Arial";
-			 ctx.strokeText(money,1680,68);
+			 ctx.strokeText(money,1680*faktorX,68*faktorY);
 			 }
 			 function clearCanvas()
 			 {
@@ -697,13 +700,13 @@
 				if(facingLeft)
 				{
 				
-				posXbullet = posX+80;
-				posYbullet=posY+50;
+				posXbullet = posX+80*faktorX;
+				posYbullet=posY+50*faktorY;
 				shootTime=4;
 				}
 				else{
-         		posXbullet = posX+60;
-         		posYbullet=posY+45;
+         		posXbullet = posX+60*faktorX;
+         		posYbullet=posY+45*faktorY;
 				}
          		shooting=true;
          		}
@@ -777,7 +780,7 @@
 				
          		for(counter=0;counter<8;counter++)
          		{
-         			if(posXshot > posXop[counter]-150 && posXshot < posXop[counter]+150&&posYshot > posYop[counter]-00 &&posYshot < posYop[counter]+120&&opponentDead[counter]!=1)
+         			if(posXshot > posXop[counter]-150*faktorX && posXshot < posXop[counter]+150*faktorX&&posYshot > posYop[counter]-00 &&posYshot < posYop[counter]+120*faktorY&&opponentDead[counter]!=1)
 					{
 					opponentDead[counter]=1;
 					score+=100;
@@ -807,21 +810,21 @@
          	{
          	if(facingLeft)
          	{
-	ctx.translate(posX+100,posY+85);
+	ctx.translate(posX+100*faktorX,posY+85*faktorY);
          	ctx.rotate(ang+Math.PI);
 			ctx.save();
 			ctx.scale(1,-1);
-         	ctx.drawImage(shotgun,0,0,130,30);
+         	ctx.drawImage(shotgun,0,0,130*faktorX,30*faktorY);
 			ctx.restore();
          	ctx.rotate(-ang-Math.PI);
-         	ctx.translate(-posX-100,-posY-85);
+         	ctx.translate(-posX-100*faktorX,-posY-85*faktorY);
          	}
          	else{
-         	ctx.translate(posX+60,posY+85);
+         	ctx.translate(posX+60*faktorX,posY+85*faktorY);
          	ctx.rotate(ang);
-         	ctx.drawImage(shotgun,0,0,130,30);
+         	ctx.drawImage(shotgun,0,0,130*faktorX,30*faktorY);
          	ctx.rotate(-ang);
-         	ctx.translate(-posX-60,-posY-85);
+         	ctx.translate(-posX-60*faktorX,-posY-85*faktorY);
          	}
          
          
@@ -835,21 +838,21 @@
          	{
          	if((timer/64)<1)
          	{
-         	 ctx.drawImage(img1links,posX,posY,160,160);
+         	 ctx.drawImage(img1links,posX,posY,160*faktorX,160*faktorY);
          	}
          	else if((timer/64)<=2)
          	{
-         	ctx.drawImage(img2links,posX,posY,160,160);
+         	ctx.drawImage(img2links,posX,posY,160*faktorX,160*faktorY);
          	}
          	} 
          	else{
          		if((timer/64)<1)
          	{
-         	 ctx.drawImage(img1,posX,posY,160,160);
+         	 ctx.drawImage(img1,posX,posY,160*faktorX,160*faktorY);
          	}
          	else if((timer/64)<=2)
          	{
-         	ctx.drawImage(img2,posX,posY,160,160);
+         	ctx.drawImage(img2,posX,posY,160*faktorX,160*faktorY);
          	}
          	}
          	
@@ -857,10 +860,10 @@
          	 else{
 			 if(facingLeft)
 			 {
-			      	 ctx.drawImage(img1links,posX,posY,160,160);
+			      	 ctx.drawImage(img1links,posX,posY,160*faktorX,160*faktorY);
 			 }
 			 else{
-         	 ctx.drawImage(img1,posX,posY,160,160);
+         	 ctx.drawImage(img1,posX,posY,160*faktorX,160*faktorY);
 			 }
          	 }
          	}
@@ -868,7 +871,7 @@
          	{
          	ctx.font = "25px verdana";
          	ctx.fillStyle = "#000";
-         	ctx.fillText("Score: " + score,10,20);
+         	ctx.fillText("Score: " + score,10*faktorX,20*faktorY);
          	ctx.font = "25px verdana";
          	ctx.fillStyle = "#000";
  
@@ -879,11 +882,11 @@
          	function drawPortal(){
          	if((timer/64)<1)
          	{
-         	ctx.drawImage(portal1,1731,700,160,160);
+         	ctx.drawImage(portal1,1731*faktorX,700*faktorY,160*faktorX,160*faktorY);
          	}
          	else if((timer/64)<=2)
          	{
-         	ctx.drawImage(portal2,1731,700,160,160);
+         	ctx.drawImage(portal2,1731*faktorX,700*faktorY,160*faktorX,160*faktorY);
          	}
          
          	}
@@ -963,7 +966,7 @@
          	speedOP[counter] = -speedOP[counter];
          
          	}
-         	else if(posXop[counter] > 1731)
+         	else if(posXop[counter] > 1731*faktorX)
          	{
          		speedOP[counter] = -speedOP[counter];
          
@@ -971,9 +974,9 @@
          	posXop[counter]-=speedOP[counter];
 			if(oppType[counter]>2&&oppType[counter]<=3)
 			{
-			if(posYop[counter]>200)
+			if(posYop[counter]>200*faktorY)
 			{
-			posYop[counter]-=10;
+			posYop[counter]-=10*faktorY;
 			}
 			 grenadeDrop();
 			}
@@ -983,57 +986,57 @@
 			{
 			 	if((timer/32)<1&&opponentDead[counter]==0)
          	{
-         	ctx.drawImage(opp1gold,posXop[counter],posYop[counter],160,160);
+         	ctx.drawImage(opp1gold,posXop[counter],posYop[counter],160*faktorX,160*faktorY);
          	}
          	else if((timer/32)<2&&opponentDead[counter]==0)
          	{
-         	ctx.drawImage(opp2gold,posXop[counter],posYop[counter],160,160);
+         	ctx.drawImage(opp2gold,posXop[counter],posYop[counter],160*faktorX,160*faktorY);
          	}
          	else if((timer/32)<3&&opponentDead[counter]==0)
          	{
-         	ctx.drawImage(opp3gold,posXop[counter],posYop[counter],160,160);
+         	ctx.drawImage(opp3gold,posXop[counter],posYop[counter],160*faktorX,160*faktorY);
          	}
          	else if((timer/32)<=4&&opponentDead[counter]==0)
          	{
-         	ctx.drawImage(opp4gold,posXop[counter],posYop[counter],160,160);
+         	ctx.drawImage(opp4gold,posXop[counter],posYop[counter],160*faktorX,160*faktorY);
          	}
 			}
 			else if(oppType[counter]<=2)
 			{
          	if((timer/32)<1&&opponentDead[counter]==0)
          	{
-         	ctx.drawImage(opp1,posXop[counter],posYop[counter],160,160);
+         	ctx.drawImage(opp1,posXop[counter],posYop[counter],160*faktorX,160*faktorY);
          	}
          	else if((timer/32)<2&&opponentDead[counter]==0)
          	{
-         	ctx.drawImage(opp2,posXop[counter],posYop[counter],160,160);
+         	ctx.drawImage(opp2,posXop[counter],posYop[counter],160*faktorX,160*faktorY);
          	}
          	else if((timer/32)<3&&opponentDead[counter]==0)
          	{
-         	ctx.drawImage(opp3,posXop[counter],posYop[counter],160,160);
+         	ctx.drawImage(opp3,posXop[counter],posYop[counter],160*faktorX,160*faktorY);
          	}
          	else if((timer/32)<=4&&opponentDead[counter]==0)
          	{
-         	ctx.drawImage(opp4,posXop[counter],posYop[counter],160,160);
+         	ctx.drawImage(opp4,posXop[counter],posYop[counter],160*faktorX,160*faktorY);
          	}
 			}
 			else if(oppType[counter]<=3)
 			{
          	if((timer/32)<1&&opponentDead[counter]==0)
          	{
-         	ctx.drawImage(bomb1,posXop[counter],posYop[counter],160,160);
+         	ctx.drawImage(bomb1,posXop[counter],posYop[counter],160*faktorX,160*faktorY);
          	}
          	else if((timer/32)<2&&opponentDead[counter]==0)
          	{
-         	ctx.drawImage(bomb2,posXop[counter],posYop[counter],160,160);
+         	ctx.drawImage(bomb2,posXop[counter],posYop[counter],160*faktorX,160*faktorY);
          	}
          	else if((timer/32)<3&&opponentDead[counter]==0)
          	{
-         	ctx.drawImage(bomb3,posXop[counter],posYop[counter],160,160);
+         	ctx.drawImage(bomb3,posXop[counter],posYop[counter],160*faktorX,160**faktorY);
          	}
          	else if((timer/32)<=4&&opponentDead[counter]==0)
          	{
-         	ctx.drawImage(bomb4,posXop[counter],posYop[counter],160,160);
+         	ctx.drawImage(bomb4,posXop[counter],posYop[counter],160*faktorX,160*faktorY);
          	}
 			}
          	}
@@ -1042,57 +1045,57 @@
 			{
 			 	if((timer/32)<1&&opponentDead[counter]==0)
          	{
-         	ctx.drawImage(opp1gold,posXop[counter],posYop[counter],160,160);
+         	ctx.drawImage(opp1gold,posXop[counter],posYop[counter],160*faktorX,160*faktorY);
          	}
          	else if((timer/32)<2&&opponentDead[counter]==0)
          	{
-         	ctx.drawImage(opp2gold,posXop[counter],posYop[counter],160,160);
+         	ctx.drawImage(opp2gold,posXop[counter],posYop[counter],160*faktorX,160*faktorY);
          	}
          	else if((timer/32)<3&&opponentDead[counter]==0)
          	{
-         	ctx.drawImage(opp3gold,posXop[counter],posYop[counter],160,160);
+         	ctx.drawImage(opp3gold,posXop[counter],posYop[counter],160*faktorX,160*faktorY);
          	}
          	else if((timer/32)<=4&&opponentDead[counter]==0)
          	{
-         	ctx.drawImage(opp4gold,posXop[counter],posYop[counter],160,160);
+         	ctx.drawImage(opp4gold,posXop[counter],posYop[counter],160*faktorX,160*faktorY);
          	}
 			}
 			else if(oppType[counter]<=2)
 			{
          		if((timer/32)<1&&opponentDead[counter]==0)
          	{
-         	ctx.drawImage(opp1left,posXop[counter],posYop[counter],160,160);
+         	ctx.drawImage(opp1left,posXop[counter],posYop[counter],160*faktorX,160*faktorY);
          	}
          	else if((timer/32)<2&&opponentDead[counter]==0)
          	{
-         	ctx.drawImage(opp2left,posXop[counter],posYop[counter],160,160);
+         	ctx.drawImage(opp2left,posXop[counter],posYop[counter],160*faktorX,160*faktorY);
          	}
          	else if((timer/32)<3&&opponentDead[counter]==0)
          	{
-         	ctx.drawImage(opp3left,posXop[counter],posYop[counter],160,160);
+         	ctx.drawImage(opp3left,posXop[counter],posYop[counter],160,160*faktorY);
          	}
          	else if((timer/32)<=4&&opponentDead[counter]==0)
          	{
-         	ctx.drawImage(opp4left,posXop[counter],posYop[counter],160,160);
+         	ctx.drawImage(opp4left,posXop[counter],posYop[counter],160*faktorX,160*faktorY);
          	}
 			}
 			else if(oppType[counter]<=3)
 			{
          	if((timer/32)<1&&opponentDead[counter]==0)
          	{
-         	ctx.drawImage(bomb1_l,posXop[counter],posYop[counter],160,160);
+         	ctx.drawImage(bomb1_l,posXop[counter],posYop[counter],160*faktorX,160*faktorY);
          	}
          	else if((timer/32)<2&&opponentDead[counter]==0)
          	{
-         	ctx.drawImage(bomb2_l,posXop[counter],posYop[counter],160,160);
+         	ctx.drawImage(bomb2_l,posXop[counter],posYop[counter],160*faktorX,160*faktorY);
          	}
          	else if((timer/32)<3&&opponentDead[counter]==0)
          	{
-         	ctx.drawImage(bomb3_l,posXop[counter],posYop[counter],160,160);
+         	ctx.drawImage(bomb3_l,posXop[counter],posYop[counter],160*faktorX,160*faktorY);
          	}
          	else if((timer/32)<=4&&opponentDead[counter]==0)
          	{
-         	ctx.drawImage(bomb4_l,posXop[counter],posYop[counter],160,160);
+         	ctx.drawImage(bomb4_l,posXop[counter],posYop[counter],160*faktorX,160*faktorY);
          	}
 			}
          	}
@@ -1103,7 +1106,7 @@
 		if(deathAnimation[counter]==0)
 		{
 		
-         	ctx.drawImage(star2,posXop[counter],posYop[counter],160,160);
+         	ctx.drawImage(star2,posXop[counter],posYop[counter],160*faktorX,160*faktorY);
 		
          	}
          
@@ -1120,28 +1123,28 @@
 		 {
 		 if(newEnemies%6==0)
 		 {
-		 ctx.drawImage(coin1,coinPos[counter],740,160,160);
+		 ctx.drawImage(coin1,coinPos[counter],740*faktorY,160*faktorX,160*faktorY);
 		 } if(newEnemies%6==1)
 		 {
-		 ctx.drawImage(coin2,coinPos[counter],740,160,160);
+		 ctx.drawImage(coin2,coinPos[counter],740*faktorY,160*faktorX,160*faktorY);
 		 }
 		 else if(newEnemies%6==2)
 		 {
-		 ctx.drawImage(coin3,coinPos[counter],740,160,160);
+		 ctx.drawImage(coin3,coinPos[counter],740*faktorY,160*faktorX,160*faktorY);
 		 } 
 		 else if(newEnemies%6==3)
 		 {
-		 ctx.drawImage(coin4,coinPos[counter],740,160,160);
+		 ctx.drawImage(coin4,coinPos[counter],740*faktorY,160*faktorX,160*faktorY);
 		 } 
 			 else if(newEnemies%6==4)
 		 {
-		 ctx.drawImage(coin5,coinPos[counter],740,160,160);
+		 ctx.drawImage(coin5,coinPos[counter],740*faktorY,160*faktorX,160*faktorY);
 		 }	 else if(newEnemies%6==5)
 		 {
-		 ctx.drawImage(coin6,coinPos[counter],740,160,160);
+		 ctx.drawImage(coin6,coinPos[counter],740*faktorY,160*faktorX,160*faktorY);
 		 }
 		 }
-		 if(posX>=coinPos[counter]-100&&posX<=coinPos[counter]+160&&posY<800&&posY>560)
+		 if(posX>=coinPos[counter]-100*faktorX&&posX<=coinPos[counter]+160*faktorX&&posY<800*faktorY&&posY>560*faktorY)
 		 {
 		 money++;
 		 snd.play();
@@ -1168,7 +1171,7 @@
          	{
          	if(opponentDead[counter]!=1)
          	{
-         		if(posY < posYop[counter]+150&&posY > posYop[counter]-150&&posX > posXop[counter]-100&&posX < posXop[counter] +120&&(falling||speedjump<0))
+         		if(posY < posYop[counter]+150*faktorY&&posY > posYop[counter]-150*faktorY&&posX > posXop[counter]-100*faktorX&&posX < posXop[counter] +120*faktorX&&(falling||speedjump<0))
          		{
          		opponentDead[counter]=1;
 				if(oppType[counter]<0.4)
@@ -1179,7 +1182,7 @@
 				oppDead.play();
          		temp[counter] = timer;
          		}
-         		else if(posX > posXop[counter]-100 && posX < posXop[counter]+110&&posY > posYop[counter]-100 &&posY < posYop[counter]+120)
+         		else if(posX > posXop[counter]-100*faktorX && posX < posXop[counter]+110*faktorX&&posY > posYop[counter]-100*faktorY &&posY < posYop[counter]+120*faktorY)
          		{
          		
          		lost = true;
@@ -1192,7 +1195,7 @@
 				
 		for(a=0;a<8;a++)
 		{
-		if(posXop[a]>=1500&&counter!=a)
+		if(posXop[a]>=1500*faktorX&&counter!=a)
 		{
 		spawn = false;
 		}
@@ -1201,16 +1204,16 @@
 		{
          		opponentDead[counter] = 0;
 		deathAnimation[counter]=0;
-		posYop[counter]=720;
+		posYop[counter]=720*faktorY;
          		if(speedOP[counter]<0)
          		{
          		speedOP[counter]=-speedOP[counter];
          		}
-         		posXop[counter]=1650;	
+         		posXop[counter]=1650*faktorX;	
 		oppType[counter]= oppEnemyTypes*Math.random();
 		}
 		else{
-		posXop[counter]-=3000;
+		posXop[counter]-=3000*faktorX;
 		}
 	
          		}
@@ -1228,7 +1231,7 @@
          	else{
          
          
-         	speed=16;
+         	speed=16*faktorX;
          	
          		posX-=speed;
          		}
@@ -1237,12 +1240,12 @@
          		
          	function moveRight()
          	{
-         	if(posX > 1730)
+         	if(posX > 1730*faktorX)
          	{
          	right = false;
          	}
          	else{
-         	  speed=16;
+         	  speed=16*faktorX;
          
          		posX+=speed;
          		}
@@ -1264,10 +1267,10 @@
          		posY-=speedjump*jumptime;
          		speedjump+=jumptime*grav;
          
-         		if(posY >=700)
+         		if(posY >=700*faktorY)
          		{
          		jumptime = 0;
-         		posY = 700;
+         		posY = 700*faktorY;
          		speedjump = speedjumpTemp;
          		if(up)
          		{
@@ -1285,9 +1288,9 @@
          		 jumptime=0;
          		}
          		calcJump();
-         		if(posY>=700)
+         		if(posY>=700*faktorY)
          		{
-         		posY=700;
+         		posY=700*faktorY;
          		falling=false;
          		fallOnce=false;
          		}
@@ -1295,13 +1298,9 @@
          	}
          	
          }
+		
+		 
       </script>
-      <p id="speedkmh"></p>
-      <p id="jumptime"></p>
-      <p id="jumptim"></p>
-      <p id="jumpti"></p>
-      <p id="jumpt"></p>
-      <p id="jump"></p>
-      <p id="jum"></p>
+     
    </body>
 </html>
