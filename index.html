@@ -6,6 +6,8 @@
    </head>
    <body>
       <img id="jumper1" src="./img/Mann_1.png" width="0" height="0"></img>
+      <img id="sign" src="./img/sign.png" width="0" height="0"></img>
+      <img id="signFont" src="./img/signFont.png" width="0" height="0"></img>
       <img id="arrow" src="./img/arrow.png" width="0" height="0"></img>
       <img id="sound" src="./img/sound.png" width="0" height="0"></img>
       <img id="paper" src="./img/paper.png" width="0" height="0"></img>
@@ -127,7 +129,7 @@
          	var star3 = document.getElementById("stern3");
          	var portal1 = document.getElementById("portal1");
          	var portal2 = document.getElementById("portal2");
-         	var posX = 10;
+         	var posX = 100;
 			var grenadePosX=['x','x','x','x','x','x','x','x'];
 			var grenadePosY=['x','x','x','x','x','x','x','x'];
 			var spawn = true;
@@ -207,7 +209,7 @@
 			function reset()
 			{
 			posY= 700;
-			posX = 10;
+			posX = 300;
 			timer=0;
 			money = 0;
 			grenadePosY=['x','x','x','x','x','x','x','x'];
@@ -354,7 +356,9 @@
          graphics();
                   
          			drawOP();
+					drawJumper(); 
          			drawShotgun();
+					
          			drawScore();
 					   ang=Math.atan((heightShotgun-(posY+85))/(widthShotgun-(posX+60)));
 			if(facingLeft)
@@ -370,6 +374,7 @@
 		 }
          			drawPortal();
          			testForGameOver();
+					testForShop();
 					 if(shooting)
          {
          shoot();
@@ -381,13 +386,19 @@
          		refreshInterval=setInterval(gameOverScreen,16);
          	}
              }
+			 function testForShop()
+			 {
+			 
+			 }
 			 function handleStartScreen(e)
 			 {
 			 if (e.keyCode === 13)
 			 {
 			 startScreenOn=false;
 			 document.body.style.backgroundImage="url('img/hintergrund.png')";
+			
 			 snd.play();
+			  document.onkeypress=null;
 			 }
 			 }
 			 function calculations()
@@ -417,7 +428,7 @@
 			 {
 			 clearCanvas();
 			 drawGrenades();
-			 drawJumper(); 
+			 
 			 drawMoney();
 			 drawCoins();
 			 }
@@ -447,7 +458,8 @@
 			 bombExplosion.play();
 			 testGrenade();
 			 ctx.drawImage(explosion,grenadePosX[i],grenadePosY[i],160,160);
-			 if(explosionTemp[i]==newEnemies)
+			 
+			 if(explosionTemp[i]==timer)
 			 {
 			 grenadePosX[i]='x';
 			 grenadePosY[i]='x';
@@ -457,7 +469,7 @@
 			 else{
 			 ctx.drawImage(grenade,grenadePosX[i],grenadePosY[i],120,120);
 			 grenadePosY[i]+=8;
-			 explosionTemp[i]=2+newEnemies;
+			 explosionTemp[i]=timer;
 			 if(explosionTemp[i]>=50)
 			 {
 			 explosionTemp[i]-50;
@@ -791,6 +803,8 @@
          }
          	function drawOP()
          	{
+	ctx.drawImage(sign,screen.width/40,(screen.height/10)*6.6,160,160);
+	ctx.drawImage(signFont,screen.width/30,(screen.height/10)*6.8,120,80);
          	for(counter=0;counter<8;counter++)
          	{
          	if(posXop[counter] !='x')
