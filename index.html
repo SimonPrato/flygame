@@ -6,6 +6,8 @@
    </head>
    <body>
       <img id="jumper1" src="./img/Mann_1.png" width="0" height="0"></img>
+      <img id="sound" src="./img/sound.png" width="0" height="0"></img>
+      <img id="paper" src="./img/paper.png" width="0" height="0"></img>
       <img id="start" src="./img/Start.png" width="0" height="0"></img>
       <img id="bomb1" src="./img/bomb1.png" width="0" height="0"></img>
       <img id="bomb1_left" src="./img/bomb1_left.png" width="0" height="0"></img>
@@ -62,6 +64,7 @@
              var c=document.getElementById("theCanvas");
              var ctx=c.getContext("2d");
 			 var snd = new Audio("coin.wav");
+			 var startMusic = new Audio("y2mate.com - soda_dungeon_ost_tavern_gZ97v7es5Rk.mp3");
 			 var bombFall = new Audio("bomb_fall.wav");
 			 var bombExplosion = new Audio("bombExplosion.wav");
 			 var lostSound = new Audio("lose.wav");
@@ -173,6 +176,7 @@
          	var refreshInterval=setInterval(game,16);
 			function gameOverScreen()
 			{
+			document.onkeypress=null;
 			clearCanvas();
 			timer++;
 			 
@@ -191,6 +195,7 @@
 				{
 			deathScreenRectY+=20;
 				}
+			
 				
 		}
 			function reset()
@@ -224,24 +229,28 @@
 			function startScreen()
 			{
 			reset();
+			
 			startScreenOn=true;
 			lost=false;
 			clearCanvas();
+			document.onmousedown=handleMouseDown;
 			document.body.style.backgroundImage="url('img/startScreen.png')";
-			
-			
+			ctx.drawImage(sound,(screen.width/1890)*1660,(screen.height/4)*3,100,100);
+			ctx.drawImage(paper,(screen.width/8)*6.75,(screen.height/20),300,700);
 			document.onkeypress=handleStartScreen;
 			ctx.font="30px Arial";
-			ctx.fillText("Version:1.1",1700,150);
+			ctx.fillText("Version:2.1",(screen.width/1890)*1660,screen.height/5);
 			ctx.font="20px Arial";
-			ctx.fillText("Jonas mach mir",1700,200);
-			ctx.fillText("einen Startscreen",1700,220);
-		ctx.fillText("-Handlichere Shotgun",1690,260);
-		ctx.fillText("-Startscreen",1690,280);
-		ctx.fillText("-Handlichere Shotgun",1690,300);
-		ctx.fillText("-Bug fixes",1690,320);
-		ctx.fillText("-Bug fixes",1690,340);
+			ctx.fillText("-Soundtracks!",(screen.width/1890)*1650,screen.height/5+40);
+			ctx.fillText("-Schöneres Design",(screen.width/1890)*1650,screen.height/5+60);
 		ctx.fillText("Viel Spaß",1690,600);
+			}
+			function handleMouseDown(e)
+			{
+			if(e.pageX>(screen.width/1890)*1660&&e.pageX<(screen.width/1890)*1660+100&&e.pageY>(screen.height/4)*3&&e.pageY<(screen.height/4)*3+100)
+			{
+			startMusic.play();
+			}
 			}
          	function start() {
          	if(!lost)
