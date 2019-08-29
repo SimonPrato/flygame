@@ -6,6 +6,7 @@
    </head>
    <body>
       <img id="jumper1" src="./img/Mann_1.png" width="0" height="0"></img>
+      <img id="arrow" src="./img/arrow.png" width="0" height="0"></img>
       <img id="sound" src="./img/sound.png" width="0" height="0"></img>
       <img id="paper" src="./img/paper.png" width="0" height="0"></img>
       <img id="start" src="./img/Start.png" width="0" height="0"></img>
@@ -65,6 +66,9 @@
              var ctx=c.getContext("2d");
 			 var snd = new Audio("coin.wav");
 			 var startMusic = new Audio("y2mate.com - soda_dungeon_ost_tavern_gZ97v7es5Rk.mp3");
+			 var startMusic2 = new Audio("y2mate.com - soda_dungeon_ost_battle_OCXqvx1-pkg.mp3");
+			 var startMusic3 = new Audio("y2mate.com - soda_dungeon_ost_fire_Ga1spnZhunk.mp3");
+			 var startMusic4 = new Audio("y2mate.com - soda_dungeon_ost_water_wcYsy4fekeI.mp3");
 			 var bombFall = new Audio("bomb_fall.wav");
 			 var bombExplosion = new Audio("bombExplosion.wav");
 			 var lostSound = new Audio("lose.wav");
@@ -79,7 +83,8 @@
              var img4=document.getElementById("jumper4");
          	var opp1=document.getElementById("fly1");
 			var i;
-			var music = false;
+			var music = 0;
+			var musicBool=false;
          	var coin1=document.getElementById("coin1");
          	var logo=document.getElementById("logo");
          	var startPic=document.getElementById("start");
@@ -234,31 +239,97 @@
 			startScreenOn=true;
 			lost=false;
 			clearCanvas();
+			ctx.drawImage(arrow,(screen.width/1890)*1770,(screen.height/4)*2.7,100,100);
 			document.onmousedown=handleMouseDown;
 			document.body.style.backgroundImage="url('img/startScreen.png')";
 			ctx.drawImage(sound,(screen.width/1890)*1660,(screen.height/4)*3,100,100);
 			ctx.drawImage(paper,(screen.width/8)*6.75,(screen.height/20),300,700);
 			document.onkeypress=handleStartScreen;
+			ctx.font="28px Arial";
+			if(music==0)
+			{
+			ctx.fillText("Soundtrack 1",(screen.width/1890)*1610,(screen.height/4)*2.92);
+			}
+			if(music==1)
+			{
+			ctx.fillText("Soundtrack 2",(screen.width/1890)*1610,(screen.height/4)*2.92);
+			}
+			if(music==2)
+			{
+			ctx.fillText("Soundtrack 3",(screen.width/1890)*1610,(screen.height/4)*2.92);
+			}
+			if(music==3)
+			{
+			ctx.fillText("Soundtrack 4",(screen.width/1890)*1610,(screen.height/4)*2.92);
+			}
 			ctx.font="30px Arial";
 			ctx.fillText("Version:2.1",(screen.width/1890)*1660,screen.height/5);
 			ctx.font="20px Arial";
 			ctx.fillText("-Soundtracks!",(screen.width/1890)*1650,screen.height/5+40);
 			ctx.fillText("-Schöneres Design",(screen.width/1890)*1650,screen.height/5+60);
+			
 		ctx.fillText("Viel Spaß",1690,600);
 			}
 			function handleMouseDown(e)
 			{
 			if(e.pageX>(screen.width/1890)*1660&&e.pageX<(screen.width/1890)*1660+100&&e.pageY>(screen.height/4)*3&&e.pageY<(screen.height/4)*3+100)
 			{
-			if(!music)
+			if(!musicBool)
+			{
+			musicBool=true;
+			}
+			else if(musicBool)
+			{
+			musicBool=false;
+			}
+			if(music==0&&musicBool)
 			{
 			startMusic.play();
-			music=true;
+		
 			}
-			else{
-			startMusic.pause();			
-			startMusic.currentTime = 0;
-			music=false;
+			else if(music==1&&musicBool){
+			startMusic2.play();			
+			
+			
+			}
+			else if(music==2&&musicBool){
+			startMusic3.play();			
+			
+			
+			}
+			else if(music==3&&musicBool){
+			startMusic4.play();			
+			
+			
+			}
+			else if(!musicBool)
+			{
+			startMusic.pause();
+			startMusic.currentTime=0;
+			startMusic2.pause();
+			startMusic2.currentTime=0;
+			startMusic3.pause();
+			startMusic3.currentTime=0;
+			startMusic4.pause();
+			startMusic4.currentTime=0;
+			}
+			}
+			if(e.pageX>(screen.width/1890)*1770&&e.pageX<(screen.width/1890)*1770+100&&e.pageY>(screen.height/4)*2.7&&e.pageY<(screen.height/4)*2.7+100)
+			{
+			startMusic.pause();
+			startMusic.currentTime=0;
+			startMusic2.pause();
+			startMusic2.currentTime=0;
+			startMusic3.pause();
+			startMusic3.currentTime=0;
+			startMusic4.pause();
+			startMusic4.currentTime=0;
+			musicBool=false;
+			music++;
+			if(music==4)
+			{
+			
+			music=0;
 			}
 			}
 			}
