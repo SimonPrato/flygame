@@ -62,9 +62,11 @@
       <canvas id="theCanvas" height="924" width="1890"></canvas>
       <script>
          window.onload = function() {
-		 
-		 var faktorX=screen.width/1920;
-		 var faktorY=screen.height/1080;
+		var width = screen.width;
+
+var height =screen.height
+		 var faktorX=width/1920;
+		 var faktorY=height/1080;
 		 
 		 var coinPos=['x','x','x','x','x','x','x','x'];
              var c=document.getElementById("theCanvas");
@@ -486,7 +488,7 @@
          graphics();
 		 if(gun[0]==1)
 		 {
-		 ctx.drawImage(shotgun,screen.width/3.43,screen.height/2.1,100,30);
+		 ctx.drawImage(shotgun,559.8*faktorX,514.3*faktorY,100*faktorX,30*faktorY);
 		 }
 					if(price==1)
 			 {
