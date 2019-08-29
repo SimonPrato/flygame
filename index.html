@@ -182,10 +182,12 @@
          		ctx.fillText("Score: "+score,700,560);
 				
          		ctx.fillStyle="black";
-				ctx.globalAlpha=0.5
+				ctx.globalAlpha=0.2;
 				ctx.fillRect(0,0,deathScreenRectX,deathScreenRectY);
-			deathScreenRectY++;
-				
+				if(deathScreenRectY<window.height)
+				{
+			deathScreenRectY+=5;
+				}
 				
 		}
 			function reset()
