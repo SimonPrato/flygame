@@ -62,9 +62,12 @@
       <canvas id="theCanvas" height="924" width="1890"></canvas>
       <script>
          window.onload = function() {
+		 
 		 var coinPos=['x','x','x','x','x','x','x','x'];
              var c=document.getElementById("theCanvas");
              var ctx=c.getContext("2d");
+			 var background=Math.floor(Math.random()*3);
+			 
 			 var snd = new Audio("coin.wav");
 			 var price=0;
 			 var startMusic = new Audio("y2mate.com - soda_dungeon_ost_tavern_gZ97v7es5Rk.mp3");
@@ -505,7 +508,18 @@
 			 {
 			 clearInterval(refreshInterval);
 			 document.onmousedown=null;
+			 if(background==0)
+			 {
 			 document.body.style.backgroundImage="url('img/hintergrund.png')";
+			 }
+			 else if(background==1)
+			 {
+			 document.body.style.backgroundImage="url('img/hintergrund2.png')";
+			 }
+			 else if(background==2)
+			 {
+			 document.body.style.backgroundImage="url('img/hintergrund3.png')";
+			 }
 			 posX=100;
 			 refreshInterval=setInterval(start,16);
 			 }
@@ -515,7 +529,18 @@
 			 if (e.keyCode === 13)
 			 {
 			 startScreenOn=false;
+			 if(background==0)
+			 {
 			 document.body.style.backgroundImage="url('img/hintergrund.png')";
+			 }
+			 else if(background==1)
+			 {
+			 document.body.style.backgroundImage="url('img/hintergrund2.png')";
+			 }
+			 else if(background==2)
+			 {
+			 document.body.style.backgroundImage="url('img/hintergrund3.png')";
+			 }
 			
 			 snd.play();
 			  document.onkeypress=null;
