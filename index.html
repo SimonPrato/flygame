@@ -79,6 +79,7 @@
              var img4=document.getElementById("jumper4");
          	var opp1=document.getElementById("fly1");
 			var i;
+			var music = false;
          	var coin1=document.getElementById("coin1");
          	var logo=document.getElementById("logo");
          	var startPic=document.getElementById("start");
@@ -249,7 +250,16 @@
 			{
 			if(e.pageX>(screen.width/1890)*1660&&e.pageX<(screen.width/1890)*1660+100&&e.pageY>(screen.height/4)*3&&e.pageY<(screen.height/4)*3+100)
 			{
+			if(!music)
+			{
 			startMusic.play();
+			music=true;
+			}
+			else{
+			startMusic.pause();			
+			startMusic.currentTime = 0;
+			music=false;
+			}
 			}
 			}
          	function start() {
