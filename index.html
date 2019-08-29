@@ -170,7 +170,7 @@
          	var posYshot;
 			heightShotgun=800;
 			widthShotgun=500;
-         	setInterval(game,16);
+         	var refreshInterval=setInterval(game,16);
 			function gameOverScreen()
 			{
 			timer++;
@@ -282,7 +282,8 @@
          	}
          	else{
 			timer=0;
-         		setIntervall(gameOverScreen,16);
+			clearInterval(refreshInterval);
+         		refreshInterval=setInterval(gameOverScreen,16);
          	}
              }
 			 function handleStartScreen(e)
