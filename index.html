@@ -169,6 +169,25 @@
 			heightShotgun=800;
 			widthShotgun=500;
          	setInterval(game,16);
+			 function gameOverScreen()
+			 {
+			 ctx.font = "100px Arial";
+         		ctx.fillStyle='#ff0000';
+         		ctx.fillText("GameOver",645,460);
+         		ctx.font = "25px Arial";
+         		ctx.fillStyle='#fff';
+         		ctx.fillText("Score: "+score,700,560);
+         		ctx.fillStyle='#fff';
+         		ctx.fillText("Highscore: 16100 (Tobias W.)",700,590);
+				
+				score=0;
+				posXbullet=0;
+				posYbullet=0;
+				shootTime=0;shooting=false;
+				newEnemies=0;
+		posXop=[1731,'x','x','x','x','x','x','x'];
+		posYop=[720,'x','x','x','x','x','x','x'];
+			 }
 			function reset()
 			{
 			posY= 700;
@@ -399,19 +418,7 @@
 			 c.width=window.innerWidth;
 			 c.height=window.innerHeight;
 			 }
-			 function gameOverScreen()
-			 {
-			 ctx.font = "100px Arial";
-         		ctx.fillStyle='#ff0000';
-         		ctx.fillText("GameOver",645,460);
-         		ctx.font = "25px Arial";
-         		ctx.fillStyle='#fff';
-         		ctx.fillText("Score: "+score,700,560);
-         		ctx.fillStyle='#fff';
-         		ctx.fillText("Highscore: 16100 (Tobias W.)",700,590);
-				setTimeout(startScreen(),1000);
-		
-			 }
+			
 
          	function handleMouseMove(e)
          	{
