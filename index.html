@@ -6,8 +6,7 @@
    </head>
    <body>
       <img id="jumper1" src="./img/Mann_1.png" width="0" height="0"></img>
-      <img id="sign" src="./img/sign.png" width="0" height="0"></img>
-      <img id="signFont" src="./img/signFont.png" width="0" height="0"></img>
+     
       <img id="arrow" src="./img/arrow.png" width="0" height="0"></img>
       <img id="sound" src="./img/sound.png" width="0" height="0"></img>
       <img id="paper" src="./img/paper.png" width="0" height="0"></img>
@@ -67,6 +66,7 @@
              var c=document.getElementById("theCanvas");
              var ctx=c.getContext("2d");
 			 var snd = new Audio("coin.wav");
+			 var price=0;
 			 var startMusic = new Audio("y2mate.com - soda_dungeon_ost_tavern_gZ97v7es5Rk.mp3");
 			 var startMusic2 = new Audio("y2mate.com - soda_dungeon_ost_battle_OCXqvx1-pkg.mp3");
 			 var startMusic3 = new Audio("y2mate.com - soda_dungeon_ost_fire_Ga1spnZhunk.mp3");
@@ -85,6 +85,8 @@
              var img4=document.getElementById("jumper4");
          	var opp1=document.getElementById("fly1");
 			var i;
+			var gun=[1,0,0,0,0];
+			var gunCounter=0;
 			var music = 0;
 			var musicBool=false;
          	var coin1=document.getElementById("coin1");
@@ -134,6 +136,7 @@
 			var grenadePosY=['x','x','x','x','x','x','x','x'];
 			var spawn = true;
 			var money = 0;
+			var confirm=0;
          	var speedjumpTemp=2.3;
          	var score = 0;
          	var posY= 700;
@@ -169,6 +172,7 @@
          	var shooting = false;
          	var newEnemies=0;
          	var heightShotgun;
+			var gunPosses=0;
 			var deathScreenRectX=screen.width;
 			var deathScreenRectY=0;
 			var startScreenOn=true;
@@ -346,7 +350,10 @@
              	
          document.onkeydown=move;
          document.onmousemove = handleMouseMove;
+		 if(gunPosses==1)
+		 {
          document.onmousedown = shoot;
+		 }
 	
 		 resizeCanvas();
         
@@ -357,8 +364,10 @@
                   
          			drawOP();
 					drawJumper(); 
+					if(gunPosses==1)
+					{
          			drawShotgun();
-					
+					}
          			drawScore();
 					   ang=Math.atan((heightShotgun-(posY+85))/(widthShotgun-(posX+60)));
 			if(facingLeft)
@@ -386,9 +395,120 @@
          		refreshInterval=setInterval(gameOverScreen,16);
          	}
              }
+			 function drawJumperShop()
+			 {
+			 if(speed!=0)
+         	{
+         	if(facingLeft)
+         	{
+         	if((timer/64)<1)
+         	{
+         	 ctx.drawImage(img1links,posX,posY,200,200);
+         	}
+         	else if((timer/64)<=2)
+         	{
+         	ctx.drawImage(img2links,posX,posY,200,200);
+         	}
+         	} 
+         	else{
+         		if((timer/64)<1)
+         	{
+         	 ctx.drawImage(img1,posX,posY,200,200);
+         	}
+         	else if((timer/64)<=2)
+         	{
+         	ctx.drawImage(img2,posX,posY,200,200);
+         	}
+         	}
+         	
+         	 }
+         	 else{
+			 if(facingLeft)
+			 {
+			      	 ctx.drawImage(img1links,posX,posY,200,200);
+			 }
+			 else{
+         	 ctx.drawImage(img1,posX,posY,200,200);
+			 }
+         	 }
+			 }
 			 function testForShop()
 			 {
+			 if(posX<5)
+			 {
+			 clearInterval(refreshInterval);
+			 document.onmousedown=null;
+			 document.onmousedown=shopMouse;
+			 posX=100;
+			 refreshInterval=setInterval(shop,16);
+			 }
+			 }
+			 function shopMouse(e)
+			 {
 			 
+			 if(e.pageX>screen.width/3.43&&e.pageY>screen.height/2.1&&e.pageX<(screen.width/3.43)+100&&e.pageY<(screen.height/2.1)+30)
+			 {
+			 if(gun[0+gunCounter]==1)
+			 {
+			 price=1;
+			confirm++;
+			if(confirm==2&&money==2)
+			 {
+			 confirm=0;
+			 price=0;
+			 gun[0+gunCounter]=0;
+			 gunCounter++;
+			 gunPosses=1;
+			 money-=2;
+			 }
+			 else
+			 {
+			 confirm=1;
+			 
+			 }
+			}
+			 
+			 }
+			 }
+			 function shop()
+			 {
+			 document.onmousedown=shopMouse;
+			 clearCanvas();
+			 
+			 document.body.style.backgroundImage="url('img/shop.png')";
+			 calculations();
+         graphics();
+		 if(gun[0]==1)
+		 {
+		 ctx.drawImage(shotgun,screen.width/3.43,screen.height/2.1,100,30);
+		 }
+					if(price==1)
+			 {
+			  ctx.fillText("2",screen.width/3.3,screen.height/2.25);
+			 ctx.drawImage(coin1,screen.width/3.1,screen.height/2.55,80,80);
+			 }
+         			drawScore();
+					   ang=Math.atan((heightShotgun-(posY+85))/(widthShotgun-(posX+60)));
+			if(facingLeft)
+			{
+			ang=Math.atan((heightShotgun-(posY+115))/(widthShotgun-(posX+130)));
+			}
+		 if(widthShotgun-posX<60)
+		 {
+		 facingLeft=true;
+		 }
+		 else if(widthShotgun-posX > -65){
+		 facingLeft=false;
+		 }
+			 drawJumperShop();
+			 if(posX>(screen.width/10*9))
+			 {
+			 clearInterval(refreshInterval);
+			 document.onmousedown=null;
+			 document.body.style.backgroundImage="url('img/hintergrund.png')";
+			 posX=100;
+			 refreshInterval=setInterval(start,16);
+			 }
 			 }
 			 function handleStartScreen(e)
 			 {
@@ -803,8 +923,7 @@
          }
          	function drawOP()
          	{
-	ctx.drawImage(sign,screen.width/40,(screen.height/10)*6.6,160,160);
-	ctx.drawImage(signFont,screen.width/30,(screen.height/10)*6.8,120,80);
+	c
          	for(counter=0;counter<8;counter++)
          	{
          	if(posXop[counter] !='x')
