@@ -1,0 +1,849 @@
+<!doctype HTML>
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <link rel="stylesheet" type="text/css" href="./html/stylesheet.css"/>
+   </head>
+   <body>
+      <img id="jumper1" src="./img/Mann_1.png" width="0" height="0"></img>
+      <img id="coin1" src="./img/coin_1.png" width="0" height="0"></img>
+      <img id="coin2" src="./img/coin_2.png" width="0" height="0"></img>
+      <img id="coin3" src="./img/coin_3.png" width="0" height="0"></img>
+      <img id="coin4" src="./img/coin_4.png" width="0" height="0"></img>
+      <img id="coin5" src="./img/coin_5.png" width="0" height="0"></img>
+      <img id="coin6" src="./img/coin_6.png" width="0" height="0"></img>
+      <img id="jumper1left" src="./img/Mann_1_links.png" width="0" height="0"></img>
+      <img id="jumper2left" src="./img/Mann_2_links.png" width="0" height="0"></img>
+      <img id="jumper2" src="./img/Mann_2.png" width="0" height="0"></img>
+      <img id="jumper3" src="./img/Mann_3.png" width="0" height="0"></img>
+      <img id="jumper4" src="./img/Mann_4.png" width="0" height="0"></img>
+      <img id="clear" src="./img/clear.png" width="0" height="0"></img>
+      <img id="fly1" src="./img/Fliege_1.png" width="0" height="0"></img>
+      <img id="fly1gold" src="./img/Gold Fliege 1.png" width="0" height="0"></img>
+      <img id="fly2gold" src="./img/Gold Fliege 2.png" width="0" height="0"></img>
+      <img id="fly3gold" src="./img/Gold Fliege 3.png" width="0" height="0"></img>
+      <img id="fly4gold" src="./img/Gold Fliege 4.png" width="0" height="0"></img>
+      <img id="fly2" src="./img/Fliege_2.png" width="0" height="0"></img>
+      <img id="fly3" src="./img/Fliege_3.png" width="0" height="0"></img>
+      <img id="fly4" src="./img/Fliege_4.png" width="0" height="0"></img>
+      <img id="fly1left" src="./img/Fliege_1_links.png" width="0" height="0"></img>
+      <img id="fly2left" src="./img/fliege_2_links.png" width="0" height="0"></img>
+      <img id="fly3left" src="./img/Fliege_3_links.png" width="0" height="0"></img>
+      <img id="fly4left" src="./img/Fliege_4_links.png" width="0" height="0"></img>
+      <img id="shotgun" src="./img/shotgun.png" width="0" height="0"></img>
+      <img id="shotgun_links" src="./img/shotgun_links.fw.png" width="0" height="0"></img>
+      <img id="stern1" src="./img/Fliege_stirbt_1.png" width="0" height="0"></img>
+      <img id="stern2" src="./img/Fliege_stirbt_2.png" width="0" height="0"></img>
+      <img id="stern3" src="./img/Fliege_stirbt_3.png" width="0" height="0"></img>
+      <img id="portal1" src="./img/Portal_1.png" width="0" height="0"></img>
+      <img id="portal2" src="./img/Portal_2.png" width="0" height="0"></img>
+      <img id="bullet1" src="./img/Bullet 1.png" width="0" height="0"></img>
+      <img id="bullet1_l" src="./img/Bullet 1 (2).png" width="0" height="0"></img>
+      <img id="bullet2" src="./img/Bullet 2.png" width="0" height="0"></img>
+      <img id="bullet3" src="./img/Bullet 3.png" width="0" height="0"></img>
+      <img id="bullet4" src="./img/Bullet 4.png" width="0" height="0"></img>
+      <canvas id="theCanvas" height="1" width="1"></canvas>
+      <script>
+         window.onload = function() {
+		 var coinPos=['x','x','x','x','x','x','x','x'];
+             var c=document.getElementById("theCanvas");
+             var ctx=c.getContext("2d");
+			 var snd = new Audio("coin.wav");
+			 var lostSound = new Audio("lose.wav");
+			 var oppDead = new Audio("Oppdeath.wav");
+			 var shotSound = new Audio("Shot.wav");
+			 var reloadSound = new Audio("reload.wav");
+             var img1=document.getElementById("jumper1");
+             var img1links=document.getElementById("jumper1left");
+             var img2links=document.getElementById("jumper2left");
+             var img2=document.getElementById("jumper2");
+             var img3=document.getElementById("jumper3");
+             var img4=document.getElementById("jumper4");
+         	var opp1=document.getElementById("fly1");
+			var i;
+         	var coin1=document.getElementById("coin1");
+         	var coin2=document.getElementById("coin2");
+         	var coin3=document.getElementById("coin3");
+         	var coin4=document.getElementById("coin4");
+         	var coin5=document.getElementById("coin5");
+         	var coin6=document.getElementById("coin6");
+         	var opp1gold=document.getElementById("fly1gold");
+         	var opp2gold=document.getElementById("fly2gold");
+         	var opp3gold=document.getElementById("fly3gold");
+         	var opp4gold=document.getElementById("fly4gold");
+         	var opp2=document.getElementById("fly2");
+         	var shotgun=document.getElementById("shotgun");
+         	var bullet1=document.getElementById("bullet1");
+         	var bullet1_l=document.getElementById("bullet1_l");
+         	var bullet2=document.getElementById("bullet2");
+         	var bullet3=document.getElementById("bullet3");
+         	var bullet4=document.getElementById("bullet4");
+         	var shotgun_links=document.getElementById("shotgun_links");
+         	var oppHitWithGun = false;
+         	var opp3=document.getElementById("fly3");
+         	var opp4=document.getElementById("fly4");
+         	var opp1left=document.getElementById("fly1left");
+         	var opp2left=document.getElementById("fly2left");
+         	var opp3left=document.getElementById("fly3left");
+         	var opp4left=document.getElementById("fly4left");
+         	var star1 = document.getElementById("stern1");
+         	var star2 = document.getElementById("stern2");
+         	var star3 = document.getElementById("stern3");
+         	var portal1 = document.getElementById("portal1");
+         	var portal2 = document.getElementById("portal2");
+         	var posX = 10;
+			var spawn = true;
+			var money = 0;
+         	var speedjumpTemp=2.3;
+         	var score = 0;
+         	var posY= 700;
+         	var posXop=[1731,'x','x','x','x','x','x','x'];
+         	var posYop=[720,'x','x','x','x','x','x','x'];
+         	var speedOP=[5,5,5,5,5,5,5,5];
+         	var speedjump = speedjumpTemp;
+         	var acc = 0.3;
+         	var grav = -0.00981;
+         	var speed = 0;
+         	var jumptime = 0;
+         	var a;
+         	var fallOnce=false;
+       
+         	var timer=0;
+         	var lost = false;
+         	var falling = false;
+         	var right = false;
+         	var left = false;
+         	var temp=['x','x','x','x','x','x','x','x'];
+         	var repeat = false;
+         	var up = false;
+         	var enemies = 0;
+         	var ang;
+         	var speedBullet=40;
+         	var angShot;
+         	var opponentDead = [0,0,0,0,0,0,0,0];
+	var oppType=[2,2,2,2,2,2,2,2];
+         	var counter;
+         	var posXbullet=0;
+         	var posYbullet=0;
+         	var shootTime=0;
+         	var shooting = false;
+         	var newEnemies=0;
+         	var heightShotgun;
+			var deathAnimation=[0,0,0,0,0,0,0,0];
+			var oppEnemyTypes=2;
+			var widthShotgun;
+			var facingLeft=false;
+         	var posXshot;
+         	var posYshot;
+			
+         	setInterval(start,16);
+         	function start() {
+         	if(!lost)
+         	{
+         
+         
+         	
+         
+         	
+         		    	
+         document.onkeydown=move;
+         document.onmousemove = handleMouseMove;
+         document.onmousedown = shoot;
+	
+		 resizeCanvas();
+        
+         document.onkeyup=stopTime;
+         
+		calculations();
+         graphics();
+                  
+         			drawOP();
+         			drawShotgun();
+         			drawScore();
+					   
+         			drawPortal();
+         			testForGameOver();
+					 if(shooting)
+         {
+         shoot();
+         }
+         	}
+         	else{
+         		gameOverScreen();
+         	}
+             }
+			 
+			 function calculations()
+			 {
+			 	timer+=16;
+				if(timer == 144)
+				{
+				timer = 0;
+				newEnemies++;
+				}
+			 spawnNewEnemies();
+			 	updateMovement();	
+					if(falling)
+         	{
+         	fall();
+         	}
+			 }
+			 
+			 function graphics()
+			 {
+			 clearCanvas();
+			 drawJumper(); 
+			 drawMoney();
+			 drawCoins();
+			 }
+			 function spawnNewEnemies()
+			 {
+			 	if(newEnemies == 50)
+         	{
+			
+         	newEnemies = 0;
+         	enemies++;
+	
+         	posXop[enemies] = 1731;
+         	posYop[enemies]=720;
+         	}
+			 }
+			 function drawMoney()
+			 {
+			 ctx.drawImage(coin1,1500,-28,150,150);
+			  ctx.font = "60px Arial";
+					ctx.fillStyle='#fff';
+			 ctx.fillText("x ",1630,57);
+			 ctx.font = "80px Arial";
+			 ctx.fillText(money,1680,68);
+			 ctx.font = "60px Arial";
+			 ctx.lineWidth=2;
+					ctx.strokeStyle='#000';
+			 ctx.strokeText("x ",1630,57);
+			  ctx.font = "80px Arial";
+			 ctx.strokeText(money,1680,68);
+			 }
+			 function clearCanvas()
+			 {
+			 	ctx.clearRect(0, 0, 1890, 925);
+			 }
+			 function updateMovement()
+			 {
+			 if(right)
+         				{
+         				moveRight();
+         				}
+         				if(left)
+         				{
+         				moveLeft();
+         				}
+         				if(up &&!falling&&!repeat)
+         				{
+         				moveUp();
+         				}
+			 }
+			 function resizeCanvas()
+			 {
+			 c.width=window.innerWidth;
+			 c.height=window.innerHeight;
+			 }
+			 function gameOverScreen()
+			 {
+			 ctx.font = "100px Arial";
+         		ctx.fillStyle='#ff0000';
+         		ctx.fillText("GameOver",645,460);
+         		ctx.font = "25px Arial";
+         		ctx.fillStyle='#fff';
+         		ctx.fillText("Score: "+score,700,560);
+         		ctx.fillStyle='#fff';
+         		ctx.fillText("Highscore: 16100 (Tobias W.)",700,590);
+			 }
+         	function handleMouseMove(e)
+         	{
+         
+         	ang=Math.atan((e.pageY-(posY+85))/(e.pageX-(posX+60)));
+			if(facingLeft)
+			{
+			ang=Math.atan((e.pageY-(posY+115))/(e.pageX-(posX+130)));
+			}
+         	heightShotgun=e.pageY;
+	widthShotgun=e.pageX;
+		 if(widthShotgun-posX<60)
+		 {
+		 facingLeft=true;
+		 }
+		 else if(widthShotgun-posX > -65){
+		 facingLeft=false;
+		 }
+         	}
+         	function shoot()
+         	{
+			if(!lost)
+			{
+         		if(!shooting)
+         		{
+			shotSound.play();
+			
+         		angShot=ang;
+				if(facingLeft)
+				{
+				
+				posXbullet = posX+80;
+				posYbullet=posY+50;
+				shootTime=4;
+				}
+				else{
+         		posXbullet = posX+60;
+         		posYbullet=posY+45;
+				}
+         		shooting=true;
+         		}
+         		shootTime++;
+		
+				
+         		if(!facingLeft){
+				posXshot = (Math.cos(-angShot)*speedBullet*shootTime)+posXbullet;
+				posYshot=posYbullet-(Math.sin(-angShot)*speedBullet*shootTime);
+				
+				}
+				else{
+				posXshot =posXbullet+ (Math.cos(Math.PI-angShot)*speedBullet*(shootTime));
+				posYshot=posYbullet-(Math.sin(angShot)*speedBullet*shootTime);
+				}
+			
+			
+				
+						if(!oppHitWithGun)
+				{
+			if(!facingLeft)
+			{
+			
+         		ctx.translate(posXshot,posYshot);
+         		ctx.rotate(angShot);
+				if((timer/32)<1){
+				ctx.drawImage(bullet1,0,00);
+				}
+				else if((timer/32)<2){
+				ctx.drawImage(bullet2,0,0);
+				}
+				else if((timer/32)<3){
+				ctx.drawImage(bullet3,0,0);
+				}
+				else if((timer/32)<=4){
+				ctx.drawImage(bullet4,0,0);
+				}
+         		ctx.rotate(-angShot);
+         		ctx.translate(-posXshot,-posYshot);
+				}
+				else{
+				ctx.save();
+				ctx.translate(posXshot,posYshot);
+         		ctx.rotate(angShot);
+				
+				
+				if((timer/32)<1){
+				
+				ctx.drawImage(bullet1_l,0,00);
+			
+				}
+				else if((timer/32)<2){
+				
+				ctx.drawImage(bullet1_l,0,00);
+				
+				}
+				else if((timer/32)<3){
+				
+				ctx.drawImage(bullet1_l,0,00);
+				
+				}
+				else if((timer/32)<=4){
+				
+				ctx.drawImage(bullet1_l,0,00);
+				
+				}
+				ctx.restore();
+				}
+				
+				
+				
+         		for(counter=0;counter<8;counter++)
+         		{
+         			if(posXshot > posXop[counter]-150 && posXshot < posXop[counter]+150&&posYshot > posYop[counter]-00 &&posYshot < posYop[counter]+120&&opponentDead[counter]!=1)
+					{
+					opponentDead[counter]=1;
+					score+=100;
+					temp[counter] = timer;
+					oppHitWithGun = true;
+					oppDead.play();
+					if(oppType[counter]<0.4)
+					{
+					dropCoin();
+					}
+					}
+         		}
+				}
+				if(shootTime==30)
+				{
+				reloadSound.play();
+				}
+				if(shootTime>100)
+         		{
+         		shootTime=0;
+         		shooting=false;
+				oppHitWithGun=false;
+         		}
+				}
+         	}
+         	function drawShotgun()
+         	{
+         	if(facingLeft)
+         	{
+	ctx.translate(posX+100,posY+85);
+         	ctx.rotate(ang+Math.PI);
+			ctx.save();
+			ctx.scale(1,-1);
+         	ctx.drawImage(shotgun,0,0,130,30);
+			ctx.restore();
+         	ctx.rotate(-ang-Math.PI);
+         	ctx.translate(-posX-100,-posY-85);
+         	}
+         	else{
+         	ctx.translate(posX+60,posY+85);
+         	ctx.rotate(ang);
+         	ctx.drawImage(shotgun,0,0,130,30);
+         	ctx.rotate(-ang);
+         	ctx.translate(-posX-60,-posY-85);
+         	}
+         
+         
+         
+         	}
+         	
+         	function drawJumper(){
+         	if(speed!=0)
+         	{
+         	if(facingLeft)
+         	{
+         	if((timer/64)<1)
+         	{
+         	 ctx.drawImage(img1links,posX,posY,160,160);
+         	}
+         	else if((timer/64)<=2)
+         	{
+         	ctx.drawImage(img2links,posX,posY,160,160);
+         	}
+         	} 
+         	else{
+         		if((timer/64)<1)
+         	{
+         	 ctx.drawImage(img1,posX,posY,160,160);
+         	}
+         	else if((timer/64)<=2)
+         	{
+         	ctx.drawImage(img2,posX,posY,160,160);
+         	}
+         	}
+         	
+         	 }
+         	 else{
+			 if(facingLeft)
+			 {
+			      	 ctx.drawImage(img1links,posX,posY,160,160);
+			 }
+			 else{
+         	 ctx.drawImage(img1,posX,posY,160,160);
+			 }
+         	 }
+         	}
+         	function drawScore()
+         	{
+         	ctx.font = "25px verdana";
+         	ctx.fillStyle = "#000";
+         	ctx.fillText("Score: " + score,10,20);
+         	ctx.font = "25px verdana";
+         	ctx.fillStyle = "#000";
+         	ctx.fillText("Highscore: 16100 (Tobias W.)",10,45);
+			ctx.fillStyle="#000";
+			ctx.fillText("Beta",10,70);
+         	}
+         	
+         	function drawPortal(){
+         	if((timer/64)<1)
+         	{
+         	ctx.drawImage(portal1,1731,700,160,160);
+         	}
+         	else if((timer/64)<=2)
+         	{
+         	ctx.drawImage(portal2,1731,700,160,160);
+         	}
+         
+         	}
+         	function move(e)
+         	{
+         	
+         	
+           if(e.keyCode== 37||e.keyCode == 65)
+           {
+             // Key left.
+         	speed=0;
+         	left = true;
+         	}
+          if((e.keyCode == 38 || e.keyCode==87||e.keyCode==32)&& !falling)
+          {
+             // Key up.
+         	up = true;
+         	
+         }
+          
+           if(e.keyCode==39||e.keyCode==68)
+           {
+             // Key right
+         	speed=0;
+         	right = true;
+         }
+         
+           
+           }
+         	function stopTime(e)
+         	{
+         
+         
+           if (e.keyCode== 37||e.keyCode == 65)
+           {
+             // Key left
+         	left = false;
+          
+          speed = 0;
+          }
+         
+           if (e.keyCode == 38 || e.keyCode==87||e.keyCode==32)
+           {
+             // Key up.
+         	up = false;
+           speedjump=-speedjumpTemp;
+           jumptime = 0;
+           repeat=false;
+           falling = true;
+           }
+          
+           if(e.keyCode==39||e.keyCode==68)
+           {
+           right = false;
+           speed = 0;
+             // Key right.
+         
+          }
+          
+         
+           
+         }
+         	function drawOP()
+         	{
+         	for(counter=0;counter<8;counter++)
+         	{
+         	if(posXop[counter] !='x')
+         	{
+         	if(opponentDead[counter] != 1)
+         	{
+         	
+         	
+         	
+         	if(posXop[counter] <=0)
+         	{
+         	speedOP[counter] = -speedOP[counter];
+         
+         	}
+         	else if(posXop[counter] > 1731)
+         	{
+         		speedOP[counter] = -speedOP[counter];
+         
+         	}
+         	posXop[counter]-=speedOP[counter];
+         	if(speedOP[counter]>0)
+         	{
+			if(oppType[counter]<0.4)
+			{
+			 	if((timer/32)<1&&opponentDead[counter]==0)
+         	{
+         	ctx.drawImage(opp1gold,posXop[counter],posYop[counter],160,160);
+         	}
+         	else if((timer/32)<2&&opponentDead[counter]==0)
+         	{
+         	ctx.drawImage(opp2gold,posXop[counter],posYop[counter],160,160);
+         	}
+         	else if((timer/32)<3&&opponentDead[counter]==0)
+         	{
+         	ctx.drawImage(opp3gold,posXop[counter],posYop[counter],160,160);
+         	}
+         	else if((timer/32)<=4&&opponentDead[counter]==0)
+         	{
+         	ctx.drawImage(opp4gold,posXop[counter],posYop[counter],160,160);
+         	}
+			}
+			else if(oppType[counter]<=2)
+			{
+         	if((timer/32)<1&&opponentDead[counter]==0)
+         	{
+         	ctx.drawImage(opp1,posXop[counter],posYop[counter],160,160);
+         	}
+         	else if((timer/32)<2&&opponentDead[counter]==0)
+         	{
+         	ctx.drawImage(opp2,posXop[counter],posYop[counter],160,160);
+         	}
+         	else if((timer/32)<3&&opponentDead[counter]==0)
+         	{
+         	ctx.drawImage(opp3,posXop[counter],posYop[counter],160,160);
+         	}
+         	else if((timer/32)<=4&&opponentDead[counter]==0)
+         	{
+         	ctx.drawImage(opp4,posXop[counter],posYop[counter],160,160);
+         	}
+			}
+         	}
+         	else if(speedOP[counter]<0){
+         		if(oppType[counter]<0.4)
+			{
+			 	if((timer/32)<1&&opponentDead[counter]==0)
+         	{
+         	ctx.drawImage(opp1gold,posXop[counter],posYop[counter],160,160);
+         	}
+         	else if((timer/32)<2&&opponentDead[counter]==0)
+         	{
+         	ctx.drawImage(opp2gold,posXop[counter],posYop[counter],160,160);
+         	}
+         	else if((timer/32)<3&&opponentDead[counter]==0)
+         	{
+         	ctx.drawImage(opp3gold,posXop[counter],posYop[counter],160,160);
+         	}
+         	else if((timer/32)<=4&&opponentDead[counter]==0)
+         	{
+         	ctx.drawImage(opp4gold,posXop[counter],posYop[counter],160,160);
+         	}
+			}
+			else if(oppType[counter]<=2)
+			{
+         		if((timer/32)<1&&opponentDead[counter]==0)
+         	{
+         	ctx.drawImage(opp1left,posXop[counter],posYop[counter],160,160);
+         	}
+         	else if((timer/32)<2&&opponentDead[counter]==0)
+         	{
+         	ctx.drawImage(opp2left,posXop[counter],posYop[counter],160,160);
+         	}
+         	else if((timer/32)<3&&opponentDead[counter]==0)
+         	{
+         	ctx.drawImage(opp3left,posXop[counter],posYop[counter],160,160);
+         	}
+         	else if((timer/32)<=4&&opponentDead[counter]==0)
+         	{
+         	ctx.drawImage(opp4left,posXop[counter],posYop[counter],160,160);
+         	}
+			}
+         	}
+         	}
+         	else if(opponentDead[counter] == 1&&timer!=temp[counter])
+         	{
+        
+		if(deathAnimation[counter]==0)
+		{
+		
+         	ctx.drawImage(star2,posXop[counter],posYop[counter],160,160);
+		
+         	}
+         
+         	}
+         	
+         	}
+         	}
+         	}
+         function drawCoins()
+		 {
+		 for(counter=0;counter<8;counter++)
+		 {
+		 if(coinPos[counter]!='x')
+		 {
+		 if(newEnemies%6==0)
+		 {
+		 ctx.drawImage(coin1,coinPos[counter],740,160,160);
+		 } if(newEnemies%6==1)
+		 {
+		 ctx.drawImage(coin2,coinPos[counter],740,160,160);
+		 }
+		 else if(newEnemies%6==2)
+		 {
+		 ctx.drawImage(coin3,coinPos[counter],740,160,160);
+		 } 
+		 else if(newEnemies%6==3)
+		 {
+		 ctx.drawImage(coin4,coinPos[counter],740,160,160);
+		 } 
+			 else if(newEnemies%6==4)
+		 {
+		 ctx.drawImage(coin5,coinPos[counter],740,160,160);
+		 }	 else if(newEnemies%6==5)
+		 {
+		 ctx.drawImage(coin6,coinPos[counter],740,160,160);
+		 }
+		 }
+		 if(posX>=coinPos[counter]-100&&posX<=coinPos[counter]+160&&posY<800&&posY>560)
+		 {
+		 money++;
+		 snd.play();
+		 coinPos[counter]='x';
+		 }
+		 }
+		 }
+         	function dropCoin()
+			{
+			i=0;
+			while(coinPos[i]!='x'&&i!=8)
+			{
+			i++;
+			}
+			coinPos[i]=posXop[counter];
+			
+			}
+         	
+         	function testForGameOver()
+         	{
+         	for(counter=0;counter<8;counter++)
+         	{
+         	if(posXop[counter] !='x')
+         	{
+         	if(opponentDead[counter]!=1)
+         	{
+         		if(posY < posYop[counter]+150&&posY > posYop[counter]-150&&posX > posXop[counter]-100&&posX < posXop[counter] +120&&(falling||speedjump<0))
+         		{
+         		opponentDead[counter]=1;
+				if(oppType[counter]<0.4)
+				{
+				dropCoin();
+				}
+         		score+=100;
+				oppDead.play();
+         		temp[counter] = timer;
+         		}
+         		else if(posX > posXop[counter]-100 && posX < posXop[counter]+110&&posY > posYop[counter]-100 &&posY < posYop[counter]+120)
+         		{
+         		
+         		lost = true;
+				lostSound.play();
+         		}
+         		}
+         		else if(timer == temp[counter]){
+				deathAnimation[counter]=1;
+				spawn=true;
+		for(a=0;a<8;a++)
+		{
+		if(posXop[a]>=1500&&counter!=a)
+		{
+		spawn = false;
+		}
+		}
+		if(spawn)
+		{
+         		opponentDead[counter] = 0;
+		deathAnimation[counter]=0;
+         		if(speedOP[counter]<0)
+         		{
+         		speedOP[counter]=-speedOP[counter];
+         		}
+         		posXop[counter]=1650;	
+		oppType[counter]= oppEnemyTypes*Math.random();
+		}
+		else{
+		posXop[counter]-=3000;
+		}
+	
+         		}
+
+         		}
+         		}
+         	}
+         
+         	function moveLeft()
+         	{
+         	if(posX < 0)
+         	{
+         	left = false;
+         	}
+         	else{
+         
+         
+         	speed=16;
+         	
+         		posX-=speed;
+         		}
+				
+         	}
+         		
+         	function moveRight()
+         	{
+         	if(posX > 1730)
+         	{
+         	right = false;
+         	}
+         	else{
+         	  speed=16;
+         
+         		posX+=speed;
+         		}
+				
+         	}
+         	function moveUp()
+         	{
+         		calcJump();
+         		
+         	}
+         	function calcJump()
+         	{
+         	if(speedjump<0)
+         		{
+         		falling=true;
+         		}
+         		
+         		jumptime++;
+         		posY-=speedjump*jumptime;
+         		speedjump+=jumptime*grav;
+         
+         		if(posY >=700)
+         		{
+         		jumptime = 0;
+         		posY = 700;
+         		speedjump = speedjumpTemp;
+         		if(up)
+         		{
+         		repeat=true;
+         		}
+         		up=false;
+         		
+         		}
+         	}
+         	function fall()
+         	{
+         		if(!fallOnce)
+         		{
+         		 fallOnce=true;
+         		 jumptime=0;
+         		}
+         		calcJump();
+         		if(posY>=700)
+         		{
+         		posY=700;
+         		falling=false;
+         		fallOnce=false;
+         		}
+         		
+         	}
+         	
+         }
+      </script>
+      <p id="speedkmh"></p>
+      <p id="jumptime"></p>
+      <p id="jumptim"></p>
+      <p id="jumpti"></p>
+      <p id="jumpt"></p>
+      <p id="jump"></p>
+      <p id="jum"></p>
+   </body>
+</html>
