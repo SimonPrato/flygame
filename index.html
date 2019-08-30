@@ -176,7 +176,7 @@ window.onload = function() {
     let newEnemies = 0;
     let heightShotgun;
     let gunPosses = 0;
-    const deathScreenRectX = screen.width;
+    const deathScreenRectX = width;
     let deathScreenRectY = 0;
     let startScreenOn = true;
     let grenadeNumber = 0;
@@ -201,11 +201,11 @@ window.onload = function() {
         ctx.fillRect(0, 0, deathScreenRectX, deathScreenRectY);
         ctx.font = 100*faktorX+'px Arial';
         ctx.fillStyle = '#ff0000';
-        ctx.fillText('GameOver', screen.width / 3, (deathScreenRectY - (screen.height / 1.5)));
+        ctx.fillText('GameOver', width / 3, (deathScreenRectY - (height / 1.5)));
         ctx.font = 25*faktorX+'px Arial';
         ctx.fillStyle = '#fff';
-        ctx.fillText(`Score: ${score}`, screen.width / 3, (deathScreenRectY - (screen.height / 1.5)) + 25);
-        if (deathScreenRectY < screen.height) {
+        ctx.fillText(`Score: ${score}`, width / 3, (deathScreenRectY - (height / 1.5)) + 25);
+        if (deathScreenRectY < height) {
             deathScreenRectY += 20;
         }
     }
@@ -241,36 +241,36 @@ window.onload = function() {
         startScreenOn = true;
         lost = false;
         clearCanvas();
-        ctx.drawImage(arrow, (screen.width / 1890) * 1770, (screen.height / 4) * 2.7, 100*faktorX, 100*faktorY);
+        ctx.drawImage(arrow, (width / 1890) * 1770, (height / 4) * 2.7, 100*faktorX, 100*faktorY);
         document.onmousedown = handleMouseDown;
         document.body.style.backgroundImage = "url('img/startScreen.png')";
-        ctx.drawImage(sound, (screen.width / 1890) * 1660, (screen.height / 4) * 3, 100*faktorX, 100*faktorY);
-        ctx.drawImage(paper, (screen.width / 8) * 6.75, (screen.height / 20), 300*faktorX, 700*faktorY);
+        ctx.drawImage(sound, (width / 1890) * 1660, (height / 4) * 3, 100*faktorX, 100*faktorY);
+        ctx.drawImage(paper, (width / 8) * 6.75, (height / 20), 300*faktorX, 700*faktorY);
         document.onkeypress = handleStartScreen;
         ctx.font = 28*faktorX+'px Arial';
         if (music == 0) {
-            ctx.fillText('Soundtrack 1', (screen.width / 1890) * 1610, (screen.height / 4) * 2.92);
+            ctx.fillText('Soundtrack 1', (width / 1890) * 1610, (height / 4) * 2.92);
         }
         if (music == 1) {
-            ctx.fillText('Soundtrack 2', (screen.width / 1890) * 1610, (screen.height / 4) * 2.92);
+            ctx.fillText('Soundtrack 2', (width / 1890) * 1610, (height / 4) * 2.92);
         }
         if (music == 2) {
-            ctx.fillText('Soundtrack 3', (screen.width / 1890) * 1610, (screen.height / 4) * 2.92);
+            ctx.fillText('Soundtrack 3', (width / 1890) * 1610, (height / 4) * 2.92);
         }
         if (music == 3) {
-            ctx.fillText('Soundtrack 4', (screen.width / 1890) * 1610, (screen.height / 4) * 2.92);
+            ctx.fillText('Soundtrack 4', (width / 1890) * 1610, (height / 4) * 2.92);
         }
         ctx.font = 30*faktorX+'px Arial';
-        ctx.fillText('Version:2.1', (screen.width / 1890) * 1660, screen.height / 5);
+        ctx.fillText('Version:2.1', (width / 1890) * 1660, height / 5);
         ctx.font = 20*faktorX+'px Arial';
-        ctx.fillText('-Soundtracks!', (screen.width / 1890) * 1650, screen.height / 5 + 40);
-        ctx.fillText('-Schöneres Design', (screen.width / 1890) * 1650, screen.height / 5 + 60);
+        ctx.fillText('-Soundtracks!', (width / 1890) * 1650, height / 5 + 40);
+        ctx.fillText('-Schöneres Design', (width / 1890) * 1650, height / 5 + 60);
 
         ctx.fillText('Viel Spaß', 1690 * faktorX, 600 * faktorY);
     }
 
     function handleMouseDown(e) {
-        if (e.pageX > (screen.width / 1890) * 1660 && e.pageX < (screen.width / 1890) * 1660 + 100*faktorX && e.pageY > (screen.height / 4) * 3 && e.pageY < (screen.height / 4) * 3 + 100*faktorY) {
+        if (e.pageX > (width / 1890) * 1660 && e.pageX < (width / 1890) * 1660 + 100*faktorX && e.pageY > (height / 4) * 3 && e.pageY < (height / 4) * 3 + 100*faktorY) {
             if (!musicBool) {
                 musicBool = true;
             } else if (musicBool) {
@@ -295,7 +295,7 @@ window.onload = function() {
                 startMusic4.currentTime = 0;
             }
         }
-        if (e.pageX > (screen.width / 1890) * 1770 && e.pageX < (screen.width / 1890) * 1770 + 100*faktorX && e.pageY > (screen.height / 4) * 2.7 && e.pageY < (screen.height / 4) * 2.7 + 100*faktorY) {
+        if (e.pageX > (width / 1890) * 1770 && e.pageX < (width / 1890) * 1770 + 100*faktorX && e.pageY > (height / 4) * 2.7 && e.pageY < (height / 4) * 2.7 + 100*faktorY) {
             startMusic.pause();
             startMusic.currentTime = 0;
             startMusic2.pause();
@@ -419,8 +419,8 @@ window.onload = function() {
             ctx.drawImage(shotgun, 559.8 * faktorX, 510 * faktorY, 100 * faktorX, 30 * faktorY);
         }
         if (price == 1) {
-            ctx.fillText('2', screen.width / 3.3, screen.height / 2.25);
-            ctx.drawImage(coin1, screen.width / 3.1, screen.height / 2.55, 80, 80);
+            ctx.fillText('2', width / 3.3, height / 2.25);
+            ctx.drawImage(coin1, width / 3.1, height / 2.55, 80, 80);
         }
         drawScore();
         ang = Math.atan((heightShotgun - (posY + 85)) / (widthShotgun - (posX + 60)));
@@ -433,7 +433,7 @@ window.onload = function() {
             facingLeft = false;
         }
         drawJumperShop();
-        if (posX > (screen.width / 10 * 9)) {
+        if (posX > (width / 10 * 9)) {
             clearInterval(refreshInterval);
             document.onmousedown = null;
             if (background == 0) {
@@ -553,7 +553,7 @@ window.onload = function() {
     }
 
     function clearCanvas() {
-        ctx.clearRect(0, 0, screen.width, screen.height);
+        ctx.clearRect(0, 0, width, height);
     }
 
     function updateMovement() {
