@@ -78,7 +78,7 @@ lol.onload = function() {
 	document.getElementById("lol").style.backgroundSize=c.width+"px "+c.height+"px";
     const faktorX = width / 1920;
     const faktorY = height / 1080;
-
+var confirmconfirm=0;
    
 
     const snd = new Audio('coin.wav');
@@ -484,6 +484,11 @@ function getPrice()
 {
  if (gunCounter==0) {
                 price = 1;
+				if(confirmconfirm!=0)
+				{
+				confirm=0;
+				confirmconfirm=0;
+				}
                 confirm++;
                 if (confirm == 2 && money >= 2) {
                     confirm = 0;
@@ -498,6 +503,11 @@ function getPrice()
             }
 			else if (gunCounter==1) {
                 price = 2;
+				if(confirmconfirm!=1)
+				{
+				confirm=0;
+				confirmconfirm=1;
+				}
                 confirm++;
                 if (confirm == 2 && money >= 1) {
                     confirm = 0;
