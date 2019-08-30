@@ -99,7 +99,7 @@ var confirmconfirm=0;
     const img2 = document.getElementById('jumper2');
     const opp1 = document.getElementById('fly1');
     let i;
-    const gun = [1, 1, 0, 0, 0,0,0,0,0,0,0];
+    var gun = [1, 1, 0, 0, 0,0,0,0,0,0,0];
     let gunCounter = 0;
     let music = 0;
     let musicBool = false;
@@ -526,6 +526,21 @@ function getPrice()
     function shop() {
 	if (document.readyState === 'complete') {
         document.onmousedown = shopMouse;
+		window.addEventListener("wheel", event => {
+			if(gunPosses==11)
+	{
+	gunPosses=0;
+	}
+    while(gunPossed[gunPosses]==0)
+{
+	gunPosses++;
+	if(gunPosses==11)
+	{
+	gunPosses=0;
+	}
+	
+	}
+});
         clearCanvas();
 
         document.body.style.backgroundImage = "url('img/shop.png')";
