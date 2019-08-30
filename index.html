@@ -437,6 +437,7 @@ refreshInterval = setInterval(game, 16);
     }
 
     function shop() {
+	if (document.readyState === 'complete') {
         document.onmousedown = shopMouse;
         clearCanvas();
 
@@ -474,6 +475,7 @@ refreshInterval = setInterval(game, 16);
             posX = -80 * faktorX;
             refreshInterval = setInterval(start, 16);
         }
+		}
     }
 
     function handleStartScreen(e) {
