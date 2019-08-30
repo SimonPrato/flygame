@@ -527,6 +527,7 @@ function getPrice()
 	if (document.readyState === 'complete') {
         document.onmousedown = shopMouse;
 		window.addEventListener("wheel", event => {
+			gunPosses++;
 			if(gunPosses==11)
 	{
 	gunPosses=0;
