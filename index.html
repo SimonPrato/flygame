@@ -252,7 +252,7 @@ refreshInterval = setInterval(game, 16);
     }
 
     function game() {
-	if (document.readyState === 'complete') {
+	
 	
  
 
@@ -261,7 +261,7 @@ refreshInterval = setInterval(game, 16);
         } else {
             start();
         }
-		}
+		
     }
 
     function startScreen() {
@@ -342,7 +342,7 @@ refreshInterval = setInterval(game, 16);
     }
 
     function start() {
-	if (document.readyState === 'complete') {
+	if (lol.onload) {
         if (!lost) {
             if (score > 1500) {
                 oppEnemyTypes = 3;
