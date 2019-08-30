@@ -338,6 +338,7 @@ refreshInterval = setInterval(game, 16);
     }
 
     function start() {
+	if (document.readyState === 'complete') {
         if (!lost) {
             if (score > 1500) {
                 oppEnemyTypes = 3;
@@ -383,6 +384,7 @@ refreshInterval = setInterval(game, 16);
             clearInterval(refreshInterval);
             refreshInterval = setInterval(gameOverScreen, 16);
         }
+		}
     }
 
     function drawJumperShop() {
