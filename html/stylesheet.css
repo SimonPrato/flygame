@@ -1,7 +1,7 @@
 
 
 
-html, body {  background-size:cover;overflow: hidden;height: 100%; /* For 100% screen height */  width:  100%; background-image:url("../img/startScreen.png");background-repeat:no-repeat;margin:0px;} /* just to be sure these are full screen*/
+html, body { background-attachment: fixed; background-size:cover;overflow: hidden;height: 100%; /* For 100% screen height */  width:  100%; background-image:url("../img/startScreen.png");background-repeat:no-repeat;margin:0px;} /* just to be sure these are full screen*/
 
  #canvas {
 	position: absolute;

@@ -4,7 +4,8 @@
       <meta charset = "utf-8">
       <link rel="stylesheet" type="text/css" href="./html/stylesheet.css"/>
    </head>
-   <body>
+   <body id="lol">
+
       <img id="jumper1" src="./img/Mann_1.png" width="0" height="0"></img>
      
       <img id="arrow" src="./img/arrow.png" width="0" height="0"></img>
@@ -62,20 +63,18 @@
       <canvas id="theCanvas" height="924" width="1890"></canvas>
       <script>
 window.onload = function() {
-    const {
-        width
-    } = screen;
-
-    const {
-        height
-    } = screen;
-    const faktorX = width / 1920;
-    const faktorY = height / 1080;
-
-    const coinPos = ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'];
+ const coinPos = ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'];
     const c = document.getElementById('theCanvas');
     const ctx = c.getContext('2d');
     const background = Math.floor(Math.random() * 3);
+  resizeCanvas();
+    const width = c.width;
+	const height = c.height;
+	document.getElementById("lol").style.backgroundSize=c.width+"px "+c.height+"px";
+    const faktorX = width / 1920;
+    const faktorY = height / 1080;
+
+   
 
     const snd = new Audio('coin.wav');
     let price = 0;
@@ -246,7 +245,7 @@ window.onload = function() {
         document.onmousedown = handleMouseDown;
         document.body.style.backgroundImage = "url('img/startScreen.png')";
         ctx.drawImage(sound, (screen.width / 1890) * 1660, (screen.height / 4) * 3, 100, 100);
-        ctx.drawImage(paper, (screen.width / 8) * 6.75, (screen.height / 20), 300, 700);
+        ctx.drawImage(paper, (screen.width / 8) * 6.75, (screen.height / 20), 300*faktorX, 700*faktorY);
         document.onkeypress = handleStartScreen;
         ctx.font = '28px Arial';
         if (music == 0) {
@@ -325,7 +324,7 @@ window.onload = function() {
                 document.onmousedown = shoot;
             }
 
-            resizeCanvas();
+          
 
             document.onkeyup = stopTime;
 
@@ -571,7 +570,7 @@ window.onload = function() {
 
     function resizeCanvas() {
         c.width = screen.width;
-        c.height = screen.height;
+        c.height = (1080/1920)*c.width;
     }
 
 
@@ -991,6 +990,5 @@ window.onload = function() {
     }
 }
       </script>
-     
    </body>
 </html>
