@@ -191,7 +191,7 @@ window.onload = function() {
     let refreshInterval = setInterval(game, 16);
 
     function gameOverScreen() {
-        document.onkeypress = null;
+        
         clearCanvas();
         timer++;
 
@@ -204,17 +204,37 @@ window.onload = function() {
         ctx.fillText('GameOver', width / 3, (deathScreenRectY - (height / 1.5)));
         ctx.font = 25*faktorX+'px Arial';
         ctx.fillStyle = '#fff';
-        ctx.fillText(`Score: ${score}`, width / 3, (deathScreenRectY - (height / 1.5)) + 25);
+        ctx.fillText(`Score: ${score}`, width / 3, (deathScreenRectY - (height / 1.5)) + 25*faktorY);
+		ctx.font = 75*faktorX+'px Arial';
+		ctx.fillText("Press Enter to restart", width / 3, (deathScreenRectY - (height / 1.5)) + 150*faktorY);
         if (deathScreenRectY < height) {
             deathScreenRectY += 20;
+			document.onkeypress = null;
         }
+		else{
+		document.onkeypress = handleGameOverScreen;
+		}
     }
+function handleGameOverScreen(e)
+{
+if (e.keyCode === 13) {
+clearCanvas();
+reset();
+ctx.fillStyle = 'black';
+ctx.globalAlpha = 1;
+startScreenOn=true;
+clearInterval(refreshInterval);
+refreshInterval = setInterval(game, 16);
+ }
 
+}
     function reset() {
         posY = 700 * faktorY;
         posX = 300 * faktorX;
         timer = 0;
         money = 0;
+		oppEnemyTypes=2;
+		gunPosses=0;
         grenadePosY = ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'];
         grenadePosX = ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'];
         temp = ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'];
@@ -333,6 +353,7 @@ window.onload = function() {
 
             drawOP();
             drawJumper();
+			 drawGrenades();
             if (gunPosses == 1) {
                 drawShotgun();
             }
@@ -380,7 +401,7 @@ window.onload = function() {
     }
 
     function testForShop() {
-        if (posX < 5 * faktorX) {
+        if (posX <=-110 * faktorX) {
             clearInterval(refreshInterval);
             document.onmousedown = null;
             document.onmousedown = shopMouse;
@@ -420,12 +441,12 @@ window.onload = function() {
         }
         if (price == 1) {
             ctx.fillText('2', width / 3.3, height / 2.25);
-            ctx.drawImage(coin1, width / 3.1, height / 2.55, 80, 80);
+            ctx.drawImage(coin1, width / 3.1, height / 2.55, 80*faktorX, 80*faktorY);
         }
         drawScore();
-        ang = Math.atan((heightShotgun - (posY + 85)) / (widthShotgun - (posX + 60)));
+        ang = Math.atan((heightShotgun - (posY + 85)) / (widthShotgun - (posX + 60*faktorX)));
         if (facingLeft) {
-            ang = Math.atan((heightShotgun - (posY + 115)) / (widthShotgun - (posX + 130)));
+            ang = Math.atan((heightShotgun - (posY + 115)) / (widthShotgun - (posX + 130*faktorX)));
         }
         if (widthShotgun - posX < 60 * faktorX) {
             facingLeft = true;
@@ -443,7 +464,7 @@ window.onload = function() {
             } else if (background == 2) {
                 document.body.style.backgroundImage = "url('img/hintergrund3.png')";
             }
-            posX = 100 * faktorX;
+            posX = -80 * faktorX;
             refreshInterval = setInterval(start, 16);
         }
     }
@@ -485,7 +506,7 @@ window.onload = function() {
 
     function graphics() {
         clearCanvas();
-        drawGrenades();
+       
 
         drawMoney();
         drawCoins();
@@ -933,7 +954,7 @@ window.onload = function() {
     }
 
     function moveLeft() {
-        if (posX < 0) {
+        if (posX < -110) {
             left = false;
         } else {
             speed = 16 * faktorX;
