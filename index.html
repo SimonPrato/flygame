@@ -248,11 +248,16 @@ refreshInterval = setInterval(game, 16);
     }
 
     function game() {
+	if (document.readyState === 'complete') {
+	
+ 
+
         if (startScreenOn) {
             startScreen();
         } else {
             start();
         }
+		}
     }
 
     function startScreen() {
