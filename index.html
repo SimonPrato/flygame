@@ -9,6 +9,7 @@
       <img id="jumper1" src="./img/Mann_1.png" width="0" height="0"></img>
      
       <img id="arrow" src="./img/arrow.png" width="0" height="0"></img>
+      <img id="fireAxe" src="./img/fireaxe.png" width="0" height="0"></img>
       <img id="ui" src="./img/inventar.png" width="0" height="0"></img>
       <img id="sound" src="./img/sound.png" width="0" height="0"></img>
       <img id="paper" src="./img/paper.png" width="0" height="0"></img>
@@ -98,7 +99,7 @@ lol.onload = function() {
     const img2 = document.getElementById('jumper2');
     const opp1 = document.getElementById('fly1');
     let i;
-    const gun = [1, 0, 0, 0, 0];
+    const gun = [1, 1, 0, 0, 0,0,0,0,0,0,0];
     let gunCounter = 0;
     let music = 0;
     let musicBool = false;
@@ -388,6 +389,10 @@ refreshInterval = setInterval(game, 16);
 			{
 			ctx.drawImage(shotgun,1595*faktorX,136*faktorY,68*faktorX,30*faktorY);
 			}
+			else if(gunPosses==2)
+			{
+			ctx.drawImage(fireAxe,1585*faktorX,106*faktorY,80*faktorX,80*faktorY);
+			}
 
             drawOP();
             drawJumper();
@@ -395,6 +400,10 @@ refreshInterval = setInterval(game, 16);
             if (gunPosses == 1) {
                 drawShotgun();
             }
+			else if (gunPosses==2)
+			{
+			drawFireAxe();
+			}
             drawScore();
             ang = Math.atan((heightShotgun - (posY + 85 * faktorY)) / (widthShotgun - (posX + 60 * faktorX)));
             if (facingLeft) {
@@ -451,15 +460,35 @@ refreshInterval = setInterval(game, 16);
     }
 
     function shopMouse(e) {
+	ctx.font = 60*faktorX+'px Arial';
+        ctx.fillStyle = '#fff';
         if (e.pageX > 560 * faktorX && e.pageY > 500 * faktorY && e.pageX < 560 * faktorX + 100 * faktorX && e.pageY < 500 * faktorY + 80 * faktorY) {
-            if (gun[0 + gunCounter] == 1) {
+		gunCounter=0;
+		while(gun[gunCounter]==0)
+		{
+		gunCounter++;
+		}
+           getPrice();
+		   
+        }
+		else if (e.pageX > 740 * faktorX && e.pageY > 500 * faktorY && e.pageX < 740 * faktorX + 100 * faktorX && e.pageY < 500 * faktorY + 80 * faktorY) {
+		gunCounter=1;
+		while(gun[gunCounter]==0)
+		{
+		gunCounter++;
+		}
+           getPrice();
+		}
+    }
+function getPrice()
+{
+ if (gunCounter==0) {
                 price = 1;
                 confirm++;
                 if (confirm == 2 && money >= 2) {
                     confirm = 0;
                     price = 0;
-                    gun[0 + gunCounter] = 0;
-                    gunCounter++;
+                    gun[gunCounter] = 0;
                     gunPosses = 1;
 					gunPossed[gunPosses]=1;
                     money -= 2;
@@ -467,9 +496,21 @@ refreshInterval = setInterval(game, 16);
                     confirm = 1;
                 }
             }
-        }
-    }
-
+			else if (gunCounter==1) {
+                price = 2;
+                confirm++;
+                if (confirm == 2 && money >= 1) {
+                    confirm = 0;
+                    price = 0;
+                    gun[gunCounter] = 0;
+                    gunPosses = 2;
+					gunPossed[gunPosses]=1;
+                    money -= 1;
+                } else {
+                    confirm = 1;
+                }
+            }
+}
     function shop() {
 	if (document.readyState === 'complete') {
         document.onmousedown = shopMouse;
@@ -480,11 +521,30 @@ refreshInterval = setInterval(game, 16);
         graphics();
         if (gun[0] == 1) {
             ctx.drawImage(shotgun, 559.8 * faktorX, 510 * faktorY, 100 * faktorX, 30 * faktorY);
-        }
-        if (price == 1) {
+			 if (price == 1) {
             ctx.fillText('2', width / 3.3, height / 2.25);
             ctx.drawImage(coin1, width / 3.1, height / 2.55, 80*faktorX, 80*faktorY);
         }
+		
+			if(gun[1]==1)
+		{
+		ctx.drawImage(fireAxe, 760 * faktorX, 498 * faktorY, 55 * faktorX, 55 * faktorY);
+		if (price == 2) {
+            ctx.fillText('1', width / 2.5, height / 2.25);
+            ctx.drawImage(coin1, width / 2.38, height / 2.55, 80*faktorX, 80*faktorY);
+        }
+		}
+        }
+		else if(gun[1]==1)
+		{
+		ctx.drawImage(fireAxe, 580 * faktorX, 485 * faktorY, 80 * faktorX, 80 * faktorY);
+		if(price==2)
+		{
+		 ctx.fillText('1', width / 3.3, height / 2.25);
+            ctx.drawImage(coin1, width / 3.1, height / 2.55, 80*faktorX, 80*faktorY);
+		}
+		}
+       
         drawScore();
 		ctx.drawImage(ui,1530*faktorX,100*faktorY,200*faktorX,100*faktorY);
 		if(gunPosses==0)
@@ -494,6 +554,10 @@ refreshInterval = setInterval(game, 16);
 			else if(gunPosses==1)
 			{
 			ctx.drawImage(shotgun,1595*faktorX,136*faktorY,68*faktorX,30*faktorY);
+			}
+			else if(gunPosses==2)
+			{
+			ctx.drawImage(fireAxe,1585*faktorX,106*faktorY,80*faktorX,80*faktorY);
 			}
         ang = Math.atan((heightShotgun - (posY + 85)) / (widthShotgun - (posX + 60*faktorX)));
         if (facingLeft) {
@@ -536,7 +600,27 @@ refreshInterval = setInterval(game, 16);
             document.onkeypress = null;
         }
     }
-
+function drawFireAxe()
+{
+ if (!facingLeft) {
+            ctx.translate(posX + 265 * faktorX, posY + 110 * faktorY);
+            ctx.rotate(Math.PI+0.8);
+            ctx.save();
+            ctx.scale(1, -1);
+            ctx.drawImage(fireAxe, 0, 0, 150 * faktorX, 150 * faktorY);
+            ctx.restore();
+            ctx.rotate(- Math.PI-0.8);
+            ctx.translate(-posX - 265 * faktorX, -posY - 110 * faktorY);
+        } else {
+            ctx.translate(posX -100 * faktorX, posY + 110 * faktorY);
+            ctx.rotate(-0.8);
+            ctx.save();
+            ctx.drawImage(fireAxe, 0, 0, 150 * faktorX, 150 * faktorY);
+            ctx.restore();
+            ctx.rotate(0.8);
+            ctx.translate(-posX + 100 * faktorX, -posY - 110 * faktorY);
+        }
+}
     function calculations() {
         timer += 16;
         if (timer == 144) {
