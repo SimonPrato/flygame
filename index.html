@@ -975,7 +975,7 @@ refreshInterval = setInterval(game, 16);
                         score += 100;
                         oppDead.play();
                         temp[counter] = timer;
-                    } else if (posX > posXop[counter] - 100 * faktorX && posX < posXop[counter] + 110 * faktorX && posY > posYop[counter] - 100 * faktorY && posY < posYop[counter] + 120 * faktorY) {
+                    } else if (posX > posXop[counter] - 100 * faktorX && posX < posXop[counter] + 0 * faktorX && posY > posYop[counter]-100&& posY < posYop[counter] + 120 * faktorY) {
                         lost = true;
                         lostSound.play();
                     }
