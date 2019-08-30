@@ -199,10 +199,10 @@ window.onload = function() {
         ctx.fillStyle = 'black';
         ctx.globalAlpha = 0.5;
         ctx.fillRect(0, 0, deathScreenRectX, deathScreenRectY);
-        ctx.font = '100px Arial';
+        ctx.font = 100*faktorX+'px Arial';
         ctx.fillStyle = '#ff0000';
         ctx.fillText('GameOver', screen.width / 3, (deathScreenRectY - (screen.height / 1.5)));
-        ctx.font = '25px Arial';
+        ctx.font = 25*faktorX+'px Arial';
         ctx.fillStyle = '#fff';
         ctx.fillText(`Score: ${score}`, screen.width / 3, (deathScreenRectY - (screen.height / 1.5)) + 25);
         if (deathScreenRectY < screen.height) {
@@ -241,13 +241,13 @@ window.onload = function() {
         startScreenOn = true;
         lost = false;
         clearCanvas();
-        ctx.drawImage(arrow, (screen.width / 1890) * 1770, (screen.height / 4) * 2.7, 100, 100);
+        ctx.drawImage(arrow, (screen.width / 1890) * 1770, (screen.height / 4) * 2.7, 100*faktorX, 100*faktorY);
         document.onmousedown = handleMouseDown;
         document.body.style.backgroundImage = "url('img/startScreen.png')";
-        ctx.drawImage(sound, (screen.width / 1890) * 1660, (screen.height / 4) * 3, 100, 100);
+        ctx.drawImage(sound, (screen.width / 1890) * 1660, (screen.height / 4) * 3, 100*faktorX, 100*faktorY);
         ctx.drawImage(paper, (screen.width / 8) * 6.75, (screen.height / 20), 300*faktorX, 700*faktorY);
         document.onkeypress = handleStartScreen;
-        ctx.font = '28px Arial';
+        ctx.font = 28*faktorX+'px Arial';
         if (music == 0) {
             ctx.fillText('Soundtrack 1', (screen.width / 1890) * 1610, (screen.height / 4) * 2.92);
         }
@@ -260,9 +260,9 @@ window.onload = function() {
         if (music == 3) {
             ctx.fillText('Soundtrack 4', (screen.width / 1890) * 1610, (screen.height / 4) * 2.92);
         }
-        ctx.font = '30px Arial';
+        ctx.font = 30*faktorX+'px Arial';
         ctx.fillText('Version:2.1', (screen.width / 1890) * 1660, screen.height / 5);
-        ctx.font = '20px Arial';
+        ctx.font = 20*faktorX+'px Arial';
         ctx.fillText('-Soundtracks!', (screen.width / 1890) * 1650, screen.height / 5 + 40);
         ctx.fillText('-Schöneres Design', (screen.width / 1890) * 1650, screen.height / 5 + 60);
 
@@ -539,16 +539,16 @@ window.onload = function() {
 
     function drawMoney() {
         ctx.drawImage(coin1, 1500 * faktorX, -28 * faktorY, 150 * faktorX, 150 * faktorY);
-        ctx.font = '60px Arial';
+        ctx.font = 60*faktorX+'px Arial';
         ctx.fillStyle = '#fff';
         ctx.fillText('x ', 1630 * faktorX, 57 * faktorY);
-        ctx.font = '80px Arial';
+        ctx.font = 80*faktorX+'px Arial';
         ctx.fillText(money, 1680 * faktorX, 68 * faktorY);
-        ctx.font = '60px Arial';
+        ctx.font = 60*faktorX+'px Arial';
         ctx.lineWidth = 2;
         ctx.strokeStyle = '#000';
         ctx.strokeText('x ', 1630 * faktorX, 57 * faktorY);
-        ctx.font = '80px Arial';
+        ctx.font = 80*faktorX+'px Arial';
         ctx.strokeText(money, 1680 * faktorX, 68 * faktorY);
     }
 
@@ -705,10 +705,10 @@ window.onload = function() {
     }
 
     function drawScore() {
-        ctx.font = '25px verdana';
+        ctx.font = 25*faktorX+'px Arial';
         ctx.fillStyle = '#000';
         ctx.fillText(`Score: ${score}`, 10 * faktorX, 20 * faktorY);
-        ctx.font = '25px verdana';
+        ctx.font =25*faktorX+'px Arial';
         ctx.fillStyle = '#000';
 
         ctx.fillStyle = '#000';
