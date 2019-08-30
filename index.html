@@ -64,11 +64,13 @@
 	 
       <canvas id="theCanvas" height="924" width="1890"></canvas>
       <script>
-window.onload = function() {
+	  var lol = document.getElementById("lol");
+lol.onload = function() {
  const coinPos = ['x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'];
     const c = document.getElementById('theCanvas');
     const ctx = c.getContext('2d');
     const background = Math.floor(Math.random() * 3);
+	
   resizeCanvas();
     const width = c.width;
 	const height = c.height;
