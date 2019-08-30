@@ -9,6 +9,7 @@
       <img id="jumper1" src="./img/Mann_1.png" width="0" height="0"></img>
      
       <img id="arrow" src="./img/arrow.png" width="0" height="0"></img>
+      <img id="ui" src="./img/inventar.png" width="0" height="0"></img>
       <img id="sound" src="./img/sound.png" width="0" height="0"></img>
       <img id="paper" src="./img/paper.png" width="0" height="0"></img>
       <img id="start" src="./img/Start.png" width="0" height="0"></img>
@@ -18,6 +19,7 @@
       <img id="bomb2_left" src="./img/bomb2_left.png" width="0" height="0"></img>
       <img id="bomb3_left" src="./img/bomb3_left.png" width="0" height="0"></img>
       <img id="bomb4_left" src="./img/bomb4_left.png" width="0" height="0"></img>
+      <img id="fist" src="./img/fist.png" width="0" height="0"></img>
       <img id="bomb2" src="./img/bomb2.png" width="0" height="0"></img>
       <img id="bomb3" src="./img/bomb3.png" width="0" height="0"></img>
       <img id="bomb4" src="./img/bomb4.png" width="0" height="0"></img>
@@ -356,6 +358,8 @@ refreshInterval = setInterval(game, 16);
 
             calculations();
             graphics();
+			ctx.drawImage(ui,1530*faktorX,100*faktorY,200*faktorX,100*faktorY);
+			ctx.drawImage(fist,1585*faktorX,120*faktorY,80*faktorX,60*faktorY);
 
             drawOP();
             drawJumper();
@@ -388,6 +392,7 @@ refreshInterval = setInterval(game, 16);
     }
 
     function drawJumperShop() {
+	
         if (speed != 0) {
             if (facingLeft) {
                 if ((timer / 64) < 1) {
@@ -418,7 +423,7 @@ refreshInterval = setInterval(game, 16);
     }
 
     function shopMouse(e) {
-        if (e.pageX > 559.8 * faktorX && e.pageY > 514.3 * faktorY && e.pageX < 559.8 * faktorX + 100 * faktorX && e.pageY < 514.3 * faktorY + 30 * faktorY) {
+        if (e.pageX > 560 * faktorX && e.pageY > 500 * faktorY && e.pageX < 560 * faktorX + 100 * faktorX && e.pageY < 500 * faktorY + 80 * faktorY) {
             if (gun[0 + gunCounter] == 1) {
                 price = 1;
                 confirm++;
@@ -452,6 +457,8 @@ refreshInterval = setInterval(game, 16);
             ctx.drawImage(coin1, width / 3.1, height / 2.55, 80*faktorX, 80*faktorY);
         }
         drawScore();
+		ctx.drawImage(ui,1530*faktorX,100*faktorY,200*faktorX,100*faktorY);
+			ctx.drawImage(fist,1585*faktorX,120*faktorY,80*faktorX,60*faktorY);
         ang = Math.atan((heightShotgun - (posY + 85)) / (widthShotgun - (posX + 60*faktorX)));
         if (facingLeft) {
             ang = Math.atan((heightShotgun - (posY + 115)) / (widthShotgun - (posX + 130*faktorX)));
