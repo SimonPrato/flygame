@@ -270,7 +270,7 @@ window.onload = function() {
     }
 
     function handleMouseDown(e) {
-        if (e.pageX > (screen.width / 1890) * 1660 && e.pageX < (screen.width / 1890) * 1660 + 100 && e.pageY > (screen.height / 4) * 3 && e.pageY < (screen.height / 4) * 3 + 100) {
+        if (e.pageX > (screen.width / 1890) * 1660 && e.pageX < (screen.width / 1890) * 1660 + 100*faktorX && e.pageY > (screen.height / 4) * 3 && e.pageY < (screen.height / 4) * 3 + 100*faktorY) {
             if (!musicBool) {
                 musicBool = true;
             } else if (musicBool) {
@@ -295,7 +295,7 @@ window.onload = function() {
                 startMusic4.currentTime = 0;
             }
         }
-        if (e.pageX > (screen.width / 1890) * 1770 && e.pageX < (screen.width / 1890) * 1770 + 100 && e.pageY > (screen.height / 4) * 2.7 && e.pageY < (screen.height / 4) * 2.7 + 100) {
+        if (e.pageX > (screen.width / 1890) * 1770 && e.pageX < (screen.width / 1890) * 1770 + 100*faktorX && e.pageY > (screen.height / 4) * 2.7 && e.pageY < (screen.height / 4) * 2.7 + 100*faktorY) {
             startMusic.pause();
             startMusic.currentTime = 0;
             startMusic2.pause();
