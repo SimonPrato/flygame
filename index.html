@@ -510,7 +510,6 @@ refreshInterval = setInterval(call, 1);
     }
 
     function game() {
-	console.info("b");
 	if(lol.onload)
 	{
  
@@ -780,7 +779,6 @@ function getPrice()
 }
 function showShop()
 {
-console.info("a");
 if (document.readyState === 'complete') {
         document.onmousedown = shopMouse;
 		window.addEventListener("wheel", event => {
@@ -888,7 +886,7 @@ if (document.readyState === 'complete') {
 
 	if(diff>=46)
 {
-console.info("f")
+
 temptime=milliseconds;
 showShop();showShop();showShop();
 }
@@ -897,14 +895,14 @@ showShop();showShop();showShop();
 
 else if(diff>=32)
 {
-console.info("g")
+
 temptime=milliseconds;
 showShop();showShop();
 }
 else if(diff>=16)
 {
 temptime=milliseconds;
-console.info("h")
+
 showShop();
 
 }
