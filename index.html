@@ -192,13 +192,68 @@ var confirmconfirm=0;
     let facingLeft = false;
     let posXshot;
     let posYshot;
+	var d=new Date();
     heightShotgun = 800 * faktorY;
     widthShotgun = 500 * faktorX;
-    let refreshInterval = setInterval(game, 16);
+	var temptime=0;
+	var milliseconds;
+	var fire=false;
+	var diff;
+	var interval=0;
+	refreshInterval=setInterval(call,1);
+	
+	function call()
+	{
+	
+	
+	
+  // Code, der erst nach 2 Sekunden ausgeführt wird
+  d=new Date();
+	milliseconds=d.getMilliseconds();
+	if(milliseconds>temptime)
+	{
+	diff=milliseconds-temptime;
+	}
+	else{
+	milliseconds+=1000;
+	diff=milliseconds-temptime;
+	milliseconds-=1000;
+	}
+
+if(diff>=16)
+{
+
+temptime=milliseconds;
+game();
+}
+
+
+	
+
+	}
+	
+	
+	
+    
 
     function gameOverScreen() {
-        
-        clearCanvas();
+        d=new Date();
+	milliseconds=d.getMilliseconds();
+	if(milliseconds>temptime)
+	{
+	diff=milliseconds-temptime;
+	}
+	else{
+	milliseconds+=1000;
+	diff=milliseconds-temptime;
+	milliseconds-=1000;
+	}
+
+if(diff>=16)
+{
+
+temptime=milliseconds;
+ clearCanvas();
         timer++;
 
 
@@ -220,6 +275,8 @@ var confirmconfirm=0;
 		else{
 		document.onkeypress = handleGameOverScreen;
 		}
+}
+       
     }
 function handleGameOverScreen(e)
 {
@@ -230,7 +287,7 @@ ctx.fillStyle = 'black';
 ctx.globalAlpha = 1;
 startScreenOn=true;
 clearInterval(refreshInterval);
-refreshInterval = setInterval(game, 16);
+refreshInterval = setInterval(call, 1);
  }
 
 }
@@ -425,7 +482,7 @@ refreshInterval = setInterval(game, 16);
         } else {
             timer = 0;
             clearInterval(refreshInterval);
-            refreshInterval = setInterval(gameOverScreen, 16);
+            refreshInterval = setInterval(gameOverScreen, 1);
         }
 		}
     }
@@ -457,7 +514,7 @@ refreshInterval = setInterval(game, 16);
             document.onmousedown = null;
             document.onmousedown = shopMouse;
             posX = 100 * faktorX;
-            refreshInterval = setInterval(shop, 16);
+            refreshInterval = setInterval(shop, 1);
         }
     }
 
@@ -524,7 +581,22 @@ function getPrice()
             }
 }
     function shop() {
-	if (document.readyState === 'complete') {
+	
+	  d=new Date();
+	milliseconds=d.getMilliseconds();
+	if(milliseconds>temptime)
+	{
+	diff=milliseconds-temptime;
+	}
+	else{
+	milliseconds+=1000;
+	diff=milliseconds-temptime;
+	milliseconds-=1000;
+	}
+
+if(diff>=16)
+{
+if (document.readyState === 'complete') {
         document.onmousedown = shopMouse;
 		window.addEventListener("wheel", event => {
 			gunPosses++;
@@ -611,6 +683,11 @@ function getPrice()
             refreshInterval = setInterval(start, 16);
         }
 		}
+
+}
+
+	
+	
     }
 
     function handleStartScreen(e) {
