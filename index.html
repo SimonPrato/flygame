@@ -219,8 +219,62 @@ var confirmconfirm=0;
 	diff=milliseconds-temptime;
 	milliseconds-=1000;
 	}
+	if(diff>=110)
+{
 
-if(diff>=16)
+temptime=milliseconds;
+game();
+game();
+game();
+game();
+game();
+game();
+}
+	else if(diff>=94)
+{
+
+temptime=milliseconds;
+game();
+game();
+game();
+game();
+game();
+}
+	else if(diff>=78)
+{
+
+temptime=milliseconds;
+game();
+game();
+game();
+game();
+game();
+}
+	else if(diff>=64)
+{
+
+temptime=milliseconds;
+game();
+game();
+game();
+game();
+}
+	else if(diff>=48)
+{
+
+temptime=milliseconds;
+game();
+game();
+game();
+}
+else if(diff>=32)
+{
+
+temptime=milliseconds;
+game();
+game();
+}
+else if(diff>=16)
 {
 
 temptime=milliseconds;
@@ -248,11 +302,50 @@ game();
 	diff=milliseconds-temptime;
 	milliseconds-=1000;
 	}
-
-if(diff>=16)
+if(diff>=110)
 {
 
 temptime=milliseconds;
+showGameOverScreen();showGameOverScreen();showGameOverScreen();showGameOverScreen();showGameOverScreen();showGameOverScreen();showGameOverScreen();
+
+}
+	else if(diff>=94)
+{
+
+temptime=milliseconds;
+showGameOverScreen();showGameOverScreen();showGameOverScreen();showGameOverScreen();showGameOverScreen();showGameOverScreen();
+}
+	else if(diff>=78)
+{
+
+showGameOverScreen();showGameOverScreen();showGameOverScreen();showGameOverScreen();showGameOverScreen();
+}
+	else if(diff>=64)
+{
+
+showGameOverScreen();showGameOverScreen();showGameOverScreen();showGameOverScreen();
+}
+	else if(diff>=48)
+{
+
+showGameOverScreen();showGameOverScreen();showGameOverScreen();
+}
+else if(diff>=32)
+{
+
+showGameOverScreen();showGameOverScreen();
+}
+else if(diff>=16)
+{
+
+showGameOverScreen();
+}
+
+       
+    }
+	function showGameOverScreen()
+	{
+	temptime=milliseconds;
  clearCanvas();
         timer++;
 
@@ -275,9 +368,7 @@ temptime=milliseconds;
 		else{
 		document.onkeypress = handleGameOverScreen;
 		}
-}
-       
-    }
+	}
 function handleGameOverScreen(e)
 {
 if (e.keyCode === 13) {
@@ -580,21 +671,7 @@ function getPrice()
                 }
             }
 }
-    function shop() {
-	
-	  d=new Date();
-	milliseconds=d.getMilliseconds();
-	if(milliseconds>temptime)
-	{
-	diff=milliseconds-temptime;
-	}
-	else{
-	milliseconds+=1000;
-	diff=milliseconds-temptime;
-	milliseconds-=1000;
-	}
-
-if(diff>=16)
+function showShop()
 {
 if (document.readyState === 'complete') {
         document.onmousedown = shopMouse;
@@ -683,6 +760,41 @@ if (document.readyState === 'complete') {
             refreshInterval = setInterval(start, 16);
         }
 		}
+}
+
+    function shop() {
+	
+	  d=new Date();
+	milliseconds=d.getMilliseconds();
+	if(milliseconds>temptime)
+	{
+	diff=milliseconds-temptime;
+	}
+	else{
+	milliseconds+=1000;
+	diff=milliseconds-temptime;
+	milliseconds-=1000;
+	}
+
+
+	if(diff>=94)
+{
+
+temptime=milliseconds;
+showShop();showShop();showShop();
+}
+	
+
+
+else if(diff>=64)
+{
+
+temptime=milliseconds;
+showShop();showShop();
+}
+if(diff>=32)
+{
+showShop();
 
 }
 
