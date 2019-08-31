@@ -199,7 +199,6 @@ var confirmconfirm=0;
 	var milliseconds;
 	var fire=false;
 	var diff;
-	var interval=0;
 	refreshInterval=setInterval(call,1);
 	
 	function call()
@@ -317,27 +316,27 @@ showGameOverScreen();showGameOverScreen();showGameOverScreen();showGameOverScree
 }
 	else if(diff>=78)
 {
-
+temptime=milliseconds;
 showGameOverScreen();showGameOverScreen();showGameOverScreen();showGameOverScreen();showGameOverScreen();
 }
 	else if(diff>=64)
 {
-
+temptime=milliseconds;
 showGameOverScreen();showGameOverScreen();showGameOverScreen();showGameOverScreen();
 }
 	else if(diff>=48)
 {
-
+temptime=milliseconds;
 showGameOverScreen();showGameOverScreen();showGameOverScreen();
 }
 else if(diff>=32)
 {
-
+temptime=milliseconds;
 showGameOverScreen();showGameOverScreen();
 }
 else if(diff>=16)
 {
-
+temptime=milliseconds;
 showGameOverScreen();
 }
 
@@ -378,6 +377,7 @@ ctx.fillStyle = 'black';
 ctx.globalAlpha = 1;
 startScreenOn=true;
 clearInterval(refreshInterval);
+temptime=milliseconds;
 refreshInterval = setInterval(call, 1);
  }
 
@@ -405,7 +405,7 @@ refreshInterval = setInterval(call, 1);
     }
 
     function game() {
-	
+	console.info("b");
 	if(lol.onload)
 	{
  
@@ -573,6 +573,7 @@ refreshInterval = setInterval(call, 1);
         } else {
             timer = 0;
             clearInterval(refreshInterval);
+			temptime=milliseconds;
             refreshInterval = setInterval(gameOverScreen, 1);
         }
 		}
@@ -605,6 +606,7 @@ refreshInterval = setInterval(call, 1);
             document.onmousedown = null;
             document.onmousedown = shopMouse;
             posX = 100 * faktorX;
+			temptime=milliseconds;
             refreshInterval = setInterval(shop, 1);
         }
     }
@@ -673,6 +675,7 @@ function getPrice()
 }
 function showShop()
 {
+console.info("a");
 if (document.readyState === 'complete') {
         document.onmousedown = shopMouse;
 		window.addEventListener("wheel", event => {
@@ -757,7 +760,8 @@ if (document.readyState === 'complete') {
                 document.body.style.backgroundImage = "url('img/hintergrund3.png')";
             }
             posX = -80 * faktorX;
-            refreshInterval = setInterval(start, 16);
+			temptime=milliseconds;
+            refreshInterval = setInterval(call, 1);
         }
 		}
 }
@@ -777,23 +781,25 @@ if (document.readyState === 'complete') {
 	}
 
 
-	if(diff>=94)
+	if(diff>=46)
 {
-
+console.info("f")
 temptime=milliseconds;
 showShop();showShop();showShop();
 }
 	
 
 
-else if(diff>=64)
+else if(diff>=32)
 {
-
+console.info("g")
 temptime=milliseconds;
 showShop();showShop();
 }
-if(diff>=32)
+else if(diff>=16)
 {
+temptime=milliseconds;
+console.info("h")
 showShop();
 
 }
