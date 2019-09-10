@@ -1308,7 +1308,7 @@ function drawFireAxe()
                             } else if ((timer / 32) < 2 && opponentDead[counter] == 0) {
                                 ctx.drawImage(opp2left, posXop[counter], posYop[counter], 160 * faktorX, 160 * faktorY);
                             } else if ((timer / 32) < 3 && opponentDead[counter] == 0) {
-                                ctx.drawImage(opp3left, posXop[counter], posYop[counter], 160, 160 * faktorY);
+                                ctx.drawImage(opp3left, posXop[counter], posYop[counter], 160*faktorX, 160 * faktorY);
                             } else if ((timer / 32) <= 4 && opponentDead[counter] == 0) {
                                 ctx.drawImage(opp4left, posXop[counter], posYop[counter], 160 * faktorX, 160 * faktorY);
                             }
