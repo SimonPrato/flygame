@@ -146,14 +146,14 @@ var confirmconfirm=0;
     let spawn = true;
     let money = 0;
     let confirm = 0;
-    const speedjumpTemp = 2.3 * faktorY;
+    const speedjumpTemp = 5 * faktorY;
     let score = 0;
     let posY = 700 * faktorY;
     let posXop = [1731 * faktorX, 'x', 'x', 'x', 'x', 'x', 'x', 'x'];
     let posYop = [720 * faktorY, 'x', 'x', 'x', 'x', 'x', 'x', 'x'];
     let speedOP = [5 * faktorX, 5 * faktorX, 5 * faktorX, 5 * faktorX, 5 * faktorX, 5 * faktorX, 5 * faktorX, 5 * faktorX];
     let speedjump = speedjumpTemp;
-    const grav = -0.00981 * faktorY;
+    const grav = -0.0581 * faktorY;
     let speed = 0;
     let jumptime = 0;
     let a;
@@ -1232,14 +1232,7 @@ function drawFireAxe()
             speed = 0;
         }
 
-        if (e.keyCode == 38 || e.keyCode == 87 || e.keyCode == 32) {
-            // Key up.
-            up = false;
-            speedjump = -speedjumpTemp;
-            jumptime = 0;
-            repeat = false;
-            falling = true;
-        }
+   
 
         if (e.keyCode == 39 || e.keyCode == 68) {
             right = false;
@@ -1444,17 +1437,23 @@ function drawFireAxe()
             falling = true;
         }
 
-        jumptime++;
+        jumptime+=1;
         posY -= speedjump * jumptime;
         speedjump += jumptime * grav;
 
         if (posY >= 700 * faktorY) {
             jumptime = 0;
+			 up = false;
+            speedjump = -speedjumpTemp;
+            jumptime = 0;
+  
+            falling = true;
             posY = 700 * faktorY;
             speedjump = speedjumpTemp;
             if (up) {
                 repeat = true;
             }
+	
             up = false;
         }
     }
