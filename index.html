@@ -1371,7 +1371,7 @@ function drawFireAxe()
         for (counter = 0; counter < 8; counter++) {
             if (posXop[counter] != 'x') {
                 if (opponentDead[counter] != 1) {
-                    if (posY < posYop[counter] + 150 * faktorY && posY > posYop[counter] - 150 * faktorY && posX > posXop[counter] +100 * faktorX && posX < posXop[counter] + 120 * faktorX && (falling || speedjump < 0)) {
+                    if (posY < posYop[counter] + 150 * faktorY && posY > posYop[counter] - 150 * faktorY && posX > posXop[counter] - 100 * faktorX && posX < posXop[counter] + 120 * faktorX && (falling || speedjump < 0)) {
                         opponentDead[counter] = 1;
                         if (oppType[counter] < 0.4) {
                             dropCoin();
